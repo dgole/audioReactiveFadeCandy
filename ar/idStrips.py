@@ -6,19 +6,17 @@ import functionLib as lib
 
 nStrips = 8
 lStrip  = 64
+nLed    = nStrips*lStrip
 client = fastopc.FastOPC('localhost:7890')
 
-pixels = lib.Pixels(nStrips, lStrip, 0)
-
-theo = np.zeros_like(pixels.array)
+on = np.zeros(nLed,3)
 for i in range(0, nStrips):
     base=lStrip*i
-    theo[base:base+i+1]  = [0,0,255]
+    on[base:base+i+1]  = [0,0,255]
+off = np.zeros_like(on)
 
 while True:
-    pixels.updateSimple(theo)
-    client.putPixels(0, pixels.getArrayForDisplay())
+    client.putPixels(0, on)
     time.sleep(0.5)
-    pixels.updateSimple(np.zeros_like(theo))
-    client.putPixels(0, pixels.getArrayForDisplay)
+    client.putPixels(0, off)
     time.sleep(0.5)
