@@ -29,7 +29,6 @@ class Pixels():
             arrayNew = np.tile(arrayNew, (self.nStrips, 1))
             self.array = arrayNew
         elif arrayNew.shape == (self.nLed,   3):
-            alpha = arrayNew - self.array
             self.array = arrayNew
     def getArrayForDisplay(self):
         returnArray = self.array
