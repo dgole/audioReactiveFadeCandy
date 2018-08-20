@@ -9,7 +9,7 @@ lStrip  = 64
 nLed    = nStrips*lStrip
 client = fastopc.FastOPC('localhost:7890')
 
-on = np.zeros(nLed,3)
+on = np.zeros([nLed,3])
 for i in range(0, nStrips):
     base=lStrip*i
     on[base:base+i+1]  = [0,0,255]
