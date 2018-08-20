@@ -24,6 +24,13 @@ class Pixels():
             alpha[alpha > 0.0 ] = alphaRise
             alpha[alpha <= 0.0] = alphaDecay
             self.array = alpha*arrayNew + (1.0-alpha)*self.array
+    def updateSimple(self, arrayNew):
+        if arrayNew.shape == (self.lStrip, 3):
+            arrayNew = np.tile(arrayNew, (self.nStrips, 1))
+            self.array = arrayNew
+        elif arrayNew.shape == (self.nLed,   3):
+            alpha = arrayNew - self.array
+            self.array = arrayNew
     def getArrayForDisplay(self):
         returnArray = self.array
         returnArray[returnArray < self.minDisplay] = 0
