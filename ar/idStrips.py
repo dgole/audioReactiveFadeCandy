@@ -17,6 +17,6 @@ off = np.zeros_like(on)
 
 while True:
     client.putPixels(0, on)
-    time.sleep(0.1)
+    time.sleep(0.05)
     client.putPixels(0, off)
-    time.sleep(0.1)
+    time.sleep(0.05)
