@@ -1,0 +1,44 @@
+See the comments in the code for details of how it all works, but here's the basics.
+
+microphone.py has the stream class and functions required to take a spectrum of the current stream data and convert it 
+to more convienient units.
+
+music.py has some more advanced stuff to help analyze the spectrum and calculate patterns based on it.
+
+Typical usage will be:
+import micStream
+stream = micStream.Stream()
+loop:
+    stream.readAndCalculate()
+    use stream.freqSpectrum, and/or stream.noteSpectrum to calculate pixel values
+    update leds
+    
+
+
+Useful fields of the Stream class:
+
+stream.freqs contains a list of frequencies for which we have the fft data for
+stream.freqSpectrum is the power spectrum corresponding to the list of frequencies (gets updated every loop)
+stream.notes is a list of the 'notes' for which we get a power spectrum.  starts at 37=c3 and ends at b9=96
+stream.noteSpectrum is the power spectrum corresponding to this list of notes (gets updated every loop)
+    
+
+
+Important note about framerate:
+
+The stream is set up in blocking mode, meaning that When stream.read() is called it blocks until the requested number of
+audio frames are avaliable, and then reads them and moves on.  We tell the stream the number of samples from the mic we
+want each time we call stream.read().  This sets our LED frame rate.  
+
+For example:
+
+mic sampling rate is 44100 hz.
+We set FPS to 60.
+framesPerBuffer is 44100/60=735 (number of times the mic samples per LED frame update)
+
+So in 1/60th of a second we get 735 samples.  If we call stream.read() sooner than 1/60th of a second after the previous call 
+(this is the goal), then the code waits until there are 735 new samples avaliable and reads them then moves on. 
+
+If at any point in our loop we fail to call stream.read() within 1/60th of a second of the previous call, the audio buffer will
+overflow with more than 735 samples and will fail to read.  This throws an IOexception and will give an error message.
+If this happens frequently, either the code running in the loop needs to be faster or we can reduce the FPS parameter.
