@@ -9,9 +9,9 @@ class Pixels():
     def __init__(self, nStrips, lStrip, minDisplay):
         self.nStrips    = nStrips
         self.lStrip     = lStrip
-		self.nLed       = nStrips*lStrip
-		self.minDisplay = minDisplay
-		self.array      = np.zeros([self.nLed, 3])
+        self.nLed       = nStrips*lStrip
+        self.minDisplay = minDisplay
+        self.array      = np.zeros([self.nLed, 3])
 	def update(self, arrayNew, alphaRise, alphaDecay):
         if   arrayNew.shape == (self.lStrip, 3):
             arrayNew = np.tile(arrayNew, (self.nStrips, 1))
