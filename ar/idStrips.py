@@ -13,7 +13,7 @@ pixels = lib.Pixels(nStrips, lStrip, 0)
 theo = np.zeros_like(pixels.array)
 for i in range(0, nStrips):
     base=lStrip*i
-    arrayTheo[base:base+i+1]  = [0,0,255]
+    theo[base:base+i+1]  = [0,0,255]
 
 while True:
     pixels.update(arrayTheo, 1.0, 0.0)
