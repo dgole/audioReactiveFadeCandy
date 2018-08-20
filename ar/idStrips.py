@@ -16,9 +16,11 @@ for i in range(0, nStrips):
     theo[base:base+i+1]  = [0,0,255]
 
 while True:
-    pixels.update(theo, 1.0, 1.0)
-    client.putPixels(0, pixels.getArrayForDisplay())
+    #pixels.update(theo, 1.0, 1.0)
+    #client.putPixels(0, pixels.getArrayForDisplay())
+    client.putPixels(0, theo)
     time.sleep(1)
-    pixels.update(np.zeros_like(theo), 1.0, 1.0)
-    client.putPixels(0, pixels.getArrayForDisplay())
+    #pixels.update(np.zeros_like(theo), 1.0, 1.0)
+    #client.putPixels(0, pixels.getArrayForDisplay())
+    client.putPixels(0, np.zeros_like(theo))
     time.sleep(1)
