@@ -18,7 +18,7 @@ for i in range(0, nStrips):
 while True:
     pixels.updateSimple(theo)
     client.putPixels(0, pixels.getArrayForDisplay())
-    time.sleep(0.1)
+    time.sleep(0.5)
     pixels.updateSimple(np.zeros_like(theo))
     client.putPixels(0, pixels.getArrayForDisplay)
-    time.sleep(0.1)
+    time.sleep(0.5)
