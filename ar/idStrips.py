@@ -19,5 +19,6 @@ while True:
     pixels.update(theo, 1.0, 1.0)
     client.putPixels(0, pixels.getArrayForDisplay())
     time.sleep(1)
-    client.putPixels(0, np.zeros_like(pixels.getArrayForDisplay()))
+    pixels.update(np.zeros_like(theo), 1.0, 1.0)
+    client.putPixels(0, pixels.getArrayForDisplay())
     time.sleep(1)
