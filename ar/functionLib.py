@@ -26,5 +26,5 @@ class Pixels():
             self.array = alpha*arrayNew + (1.0-alpha)*self.array
     def getArrayForDisplay(self):
         returnArray = self.array
-        returnArray[returnArray < minDisplay] = 0
+        returnArray[returnArray < self.minDisplay] = 0
         return returnArray
