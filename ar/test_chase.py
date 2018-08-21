@@ -19,7 +19,7 @@ color=2
 theoStrip[n,color] = 255
 
 while True:
-    if n == (64-1):
+    if n == (511):
         dir *=-1
     elif n == 0:
         dir*=-1
@@ -28,4 +28,4 @@ while True:
     pixels.update(theoStrip, 0.7, 0.1)
     client.putPixels(0, pixels.getArrayForDisplay())
     n+=dir
-    time.sleep(0.005)
+    time.sleep(0.001)
