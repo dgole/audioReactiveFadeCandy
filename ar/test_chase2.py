@@ -24,7 +24,7 @@ while True:
     elif n == 0:
         dir*=-1
         theoStrip=np.roll(theoStrip, 1, axis=1)
-    theoStrip = np.roll(theoStrip, dir*128, axis=0)
+    theoStrip = np.roll(theoStrip, dir*129, axis=0)
     pixels.update(theoStrip, 0.7, 0.01)
     client.putPixels(0, pixels.getArrayForDisplay())
     n+=dir
