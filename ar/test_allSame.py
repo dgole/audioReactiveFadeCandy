@@ -4,6 +4,7 @@
 
 import fastopc, time
 import numpy as np
+import functionLib as lib
 
 nStrips = 8
 lStrip  = 64
@@ -12,7 +13,7 @@ client = fastopc.FastOPC('localhost:7890')
 
 n = 1
 dir = 1
-pixels = Pixels(nStrips, lStrip, 20)
+pixels = lib.Pixels(nStrips, lStrip, 20)
 theoStrip = np.zeros([lStrip,3])
 color=2
 theoStrip[n,color] = 255
