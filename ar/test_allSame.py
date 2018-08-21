@@ -21,10 +21,10 @@ while True:
     if n == (64-1):
         dir *=-1
     elif n == 0:
-		dir*=-1
+        dir*=-1
         theoStrip=np.roll(theoStrip, 1, axis=1)
-	theoStrip = np.roll(theoStrip, dir, axis=0)
-	pixels.update(theoStrip, 0.7, 0.1)
-	client.putPixels(0, pixels.getArrayForDisplay())
-	n+=dir
-	time.sleep(0.005)
+    theoStrip = np.roll(theoStrip, dir, axis=0)
+    pixels.update(theoStrip, 0.7, 0.1)
+    client.putPixels(0, pixels.getArrayForDisplay())
+    n+=dir
+    time.sleep(0.005)
