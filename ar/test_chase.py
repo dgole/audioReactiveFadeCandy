@@ -14,7 +14,7 @@ client = fastopc.FastOPC('localhost:7890')
 n = 1
 dir = 1
 pixels = lib.Pixels(nStrips, lStrip, 20)
-theoStrip = np.zeros([lStrip,3])
+theoStrip = np.zeros([lStrip*nStrips,3])
 color=2
 theoStrip[n,color] = 255
 
