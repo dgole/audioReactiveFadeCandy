@@ -19,6 +19,7 @@ theoStrip[n,color] = 255
 
 while True:
     if n == (64-1):
+        dir *=-1
     elif n == 0:
 		dir*=-1
 		theoStrip=np.roll(theoStrip, 1, axis=1)
