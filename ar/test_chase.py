@@ -28,4 +28,4 @@ while True:
     pixels.update(theoStrip, 0.7, 0.01)
     client.putPixels(0, pixels.getArrayForDisplay())
     n+=dir
-    time.sleep(0.01)
+    time.sleep(0.001)
