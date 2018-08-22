@@ -2,8 +2,8 @@ import time
 import numpy as np
 import pyaudio
 
-#MIC_RATE = 44100
-MIC_RATE = 48000
+MIC_RATE = 44100
+#MIC_RATE = 48000
 
 ###############################################################################
 # convert frequencies to notes 
