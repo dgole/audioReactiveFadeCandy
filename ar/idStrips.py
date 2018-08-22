@@ -4,7 +4,7 @@ import fastopc, time
 import numpy as np
 import functionLib as lib
 
-nStrips = 8
+nStrips = 16
 lStrip  = 64
 nLed    = nStrips*lStrip
 client = fastopc.FastOPC('localhost:7890')
