@@ -13,10 +13,10 @@ pixels    = lib.Pixels(nStrips, lStrip, 20)
 theoStrip = np.zeros([lStrip, 3])
 
 theoStrip[:,2] = 200
-pixels.update(theoStrip, 0.5, 0.1)
+pixels.update(theoStrip, 1.0, 0.1)
 client.putPixels(0, pixels.getArrayForDisplay())
 
-stream = micStream.Stream(fps=0.5, nBuffers=1)
+stream = micStream.Stream(fps=5, nBuffers=1)
 print(stream.fps)
 
 print("marker0")
