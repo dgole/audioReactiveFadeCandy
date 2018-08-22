@@ -19,9 +19,13 @@ client.putPixels(0, pixels.getArrayForDisplay())
 stream = micStream.Stream(fps=5, nBuffers=1)
 print(stream.fps)
 
+print(marker0)
 while True:
+    print(marker1)
     success = stream.readAndCalc()
-    if success: 
+    print(marker2)
+    if success:
+        print(marker3)
         power = stream.noteSpectrum[10]
         print(power)
-        time.sleep(0.1)
+        print(marker4)
