@@ -16,7 +16,8 @@ theoStrip[:,2] = 200
 pixels.update(theoStrip, 0.5, 0.1)
 client.putPixels(0, pixels.getArrayForDisplay())
 
-stream = micStream.Stream(fps=1, nBuffers=1)
+stream = micStream.Stream(fps=5, nBuffers=1)
+print(stream.fps)
 
 while True:
     success = stream.readAndCalc()
