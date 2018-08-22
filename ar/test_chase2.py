@@ -6,7 +6,7 @@ import fastopc, time
 import numpy as np
 import functionLib as lib
 
-nStrips = 8
+nStrips = 16
 lStrip  = 64
 
 client = fastopc.FastOPC('localhost:7890')
@@ -19,7 +19,7 @@ color=2
 theoStrip[n,color] = 255
 
 while True:
-    if n == (511):
+    if n == (nStrips*lStrip-1):
         dir *=-1
     elif n == 0:
         dir*=-1
