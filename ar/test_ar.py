@@ -5,17 +5,19 @@
 import fastopc, time
 import numpy as np
 import functionLib as lib
+import micStream
 
-numLEDs = 512
+nStrips = 16
+lStrip  = 64
 client = fastopc.FastOPC('localhost:7890')
 
-pixels = Pixels(numLEDs, 20)
-arrayTheo = np.zeros_like(pixels.array)
-for i in range(0,8):
-	base=64*i
-	arrayTheo[base:base+i+1]  = [0,0,255]
+pixels = Pixels(nStrips, lStrip, 20)
+theo = np.zeros_like(pixels.array)
+
+stream = micStream.Stream()
 
 while True:
+    stream.readAndCalculate()
 	pixels.update(arrayTheo, 1.0, 0.0)
 	client.putPixels(0, pixels.getArrayForDisplay())
 	time.sleep(1)
