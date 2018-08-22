@@ -18,6 +18,7 @@ client.putPixels(0, pixels.getArrayForDisplay())
 
 stream = micStream.Stream(fps=5, nBuffers=1)
 print(stream.fps)
+print(stream.framesPerBuffer)
 
 print("marker0")
 while True:
