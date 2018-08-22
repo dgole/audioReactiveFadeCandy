@@ -18,7 +18,7 @@ stream = micStream.Stream()
 
 while True:
     stream.readAndCalc()
-    power = stream.notesSpectrum(10)
+    power = stream.noteSpectrum(10)
     print(power)
     theoStrip[:,2] = 100
     pixels.update(theoStrip, 0.5, 0.1)
