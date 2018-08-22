@@ -19,6 +19,7 @@ pixels.update(theoStrip, 0.5, 0.1)
 client.putPixels(0, pixels.getArrayForDisplay())
 
 while True:
-    stream.readAndCalc()
-    power = stream.noteSpectrum[10]
-    print(power)
+    success = stream.readAndCalc()
+    if success: 
+        power = stream.noteSpectrum[10]
+        print(power)
