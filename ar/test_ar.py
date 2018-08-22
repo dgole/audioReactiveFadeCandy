@@ -19,6 +19,7 @@ stream = micStream.Stream()
 while True:
     stream.readAndCalculate()
     power = stream.notesSpectrum(10)
-    theoStrip[:,2] = 255
+    print(power)
+    theoStrip[:,2] = 100
     pixels.update(theoStrip, 0.5, 0.1)
     client.putPixels(0, pixels.getArrayForDisplay())
