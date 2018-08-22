@@ -25,7 +25,7 @@ while True:
         dir*=-1
         theoStrip=np.roll(theoStrip, 1, axis=1)
     theoStrip = np.roll(theoStrip, dir, axis=0)
-    pixels.update(theoStrip, 0.7, 0.005)
+    pixels.update(theoStrip, 0.9, 0.001)
     client.putPixels(0, pixels.getArrayForDisplay())
     n+=dir
     #time.sleep(0.001)
