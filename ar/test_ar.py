@@ -17,7 +17,7 @@ theoStrip = np.zeros([lStrip, 3])
 stream = micStream.Stream()
 
 while True:
-    stream.readAndCalculate()
+    stream.readAndCalc()
     power = stream.notesSpectrum(10)
     print(power)
     theoStrip[:,2] = 100
