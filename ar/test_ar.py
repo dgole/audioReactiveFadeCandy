@@ -20,5 +20,5 @@ while True:
     stream.readAndCalculate()
     power = stream.notesSpectrum(10)
     theoStrip[:,2] = 255
-	pixels.update(theoStrip, 0.5, 0.1)
-	client.putPixels(0, pixels.getArrayForDisplay())
+    pixels.update(theoStrip, 0.5, 0.1)
+    client.putPixels(0, pixels.getArrayForDisplay())
