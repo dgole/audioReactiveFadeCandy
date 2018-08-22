@@ -14,7 +14,7 @@ client = fastopc.FastOPC('localhost:7890')
 pixels    = lib.Pixels(nStrips, lStrip, 20)
 theoStrip = np.zeros([lStrip, 3])
 
-stream = micStream.Stream()
+stream = micStream.Stream(fps=20, nBuffers=2)
 
 while True:
     stream.readAndCalc()
