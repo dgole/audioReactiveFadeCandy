@@ -113,8 +113,8 @@ class Stream:
         try:
             self.newMicData = np.fromstring(self.stream.read(self.framesPerBuffer), dtype=np.int16)
             self.newMicData = self.newMicData.astype(np.float32)
-            self.micData = np.roll(self.micData, -self.framesPerBuffer)
-            self.micData[(self.nBuffers-1)*self.framesPerBuffer:(self.nBuffers)*self.framesPerBuffer] = self.newMicData
+            #self.micData = np.roll(self.micData, -self.framesPerBuffer)
+            #self.micData[(self.nBuffers-1)*self.framesPerBuffer:(self.nBuffers)*self.framesPerBuffer] = self.newMicData
             print('successfully got data from audio stream')
             self.frameCount += 1
             returnVal=True
