@@ -22,10 +22,10 @@ print(stream.fps)
 print("marker0")
 while True:
     print("marker1")
-    success = stream.readAndCalc()
+    stream.readNewData()
     print("marker2")
-    if success:
-        print("marker3")
+    #if success:
+        #print("marker3")
         #power = stream.noteSpectrum[10]
         #print(power)
-        print("marker4")
+        #print("marker4")
