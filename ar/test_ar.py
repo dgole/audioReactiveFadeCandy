@@ -24,3 +24,4 @@ while True:
     if success: 
         power = stream.noteSpectrum[10]
         print(power)
+        time.sleep(0.1)
