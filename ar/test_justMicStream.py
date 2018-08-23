@@ -5,7 +5,7 @@ import numpy as np
 #import functionLib as lib
 import micStream
 
-stream = micStream.Stream(fps=2, nBuffers=1)
+stream = micStream.Stream(fps=10, nBuffers=1)
 print(stream.fps)
 print(stream.framesPerBuffer)
 
