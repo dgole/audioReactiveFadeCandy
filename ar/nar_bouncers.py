@@ -17,6 +17,7 @@ class Bouncer :
         self.speed = speed
         self.color = color        
     	self.nPixels = nPixels
+        self.locInt = 10
         self.locFloat = float(self.locInt)
         self.outArray = np.zeros(nPixels, 3)
         self.outZeros = np.zeros_like(self.outArray)
