@@ -18,13 +18,8 @@ client.putPixels(0, pixels.getArrayForDisplay())
 
 stream = micStream.Stream()
 
-print("marker0")
 while True:
-    print("marker1")
     success = stream.readAndCalc()
-    print("marker2")
     if success:
-        print("marker3")
-        power = stream.noteSpectrum[10]
+        power = np.sum(stream.noteSpectrum[4:20]
         print(power)
-        print("marker4")
