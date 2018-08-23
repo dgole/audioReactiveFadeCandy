@@ -16,7 +16,9 @@ class Bouncer :
         self.n = n
         self.speed = speed
         self.color=color/np.amax(color)
-        self.color=int(self.color*255)
+        self.color[0]=int(self.color[0]*255)
+        self.color[1]=int(self.color[1]*255)
+        self.color[2]=int(self.color[2]*255)
         print(np.amax(self.color))
     	self.nPixels = nPixels
         self.locInt = 10
