@@ -12,7 +12,7 @@ client = fastopc.FastOPC('localhost:7890')
 pixels    = lib.Pixels(nStrips, lStrip, 20)
 theoStrip = np.zeros([lStrip, 3])
 
-theoStrip[:,2] = 100
+theoStrip[:,0] = 100
 pixels.update(theoStrip, 1.0, 0.1)
 client.putPixels(0, pixels.getArrayForDisplay())
 
@@ -23,3 +23,6 @@ while True:
     if success:
         power = np.sum(stream.noteSpectrum[4:20])
         print(power)
+        theoStrip[:,0] = power/50
+        pixels.update(theoStrip, 0.7, 0.1)
+        client.putPixels(0, pixels.getArrayForDisplay())
