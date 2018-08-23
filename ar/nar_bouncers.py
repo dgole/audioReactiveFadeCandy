@@ -25,9 +25,7 @@ class Bouncer :
             if i == self.locInt:
                 self.outArray[i] = color
             else:
-                self.outArray[i,0] = np.power(1.0 - (np.abs(self.locInt-i)/n) + 0.1,2)
-                self.outArray[i,1] = np.power(1.0 - (np.abs(self.locInt-i)/n) + 0.1,2)
-                self.outArray[i,2] = np.power(1.0 - (np.abs(self.locInt-i)/n) + 0.1,2)
+                self.outArray[i] = color
     def update(self):
         self.locFloat = self.locFloat + self.speed
         if int(self.locFloat) != self.locInt:
