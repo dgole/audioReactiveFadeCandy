@@ -19,10 +19,10 @@ powerSmooth = lib.ExpFilter(val=0.1, alpha_rise=0.1, alpha_decay=0.1)
 while True:
     success = stream.readAndCalc()
     if success: 
-        power = np.sum(stream.freqSpectrum[30//5:300//5])
+        power = np.sum(stream.freqSpectrum[10//5:300//5])
         powerSmooth.update(power)
         displayPower = power/powerSmooth.value
         theoStrip[:,0] = displayPower
         pixels.update(theoStrip, 0.9, 0.2)
-        print(displayPower)
+        print(power, powerSmooth.value)
         #client.putPixels(0, pixels.getArrayForDisplay())
