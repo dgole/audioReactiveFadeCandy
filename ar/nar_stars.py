@@ -33,7 +33,11 @@ while True:
         starNum = np.floor(i/10)
         print(starNum)
         pixels.update(theoStrips[starNum], 0.2, 0.0)
-        client.putPixels(0, pixels.getArrayForDisplay())
+        if np.sum(pixels.getArrayForDisplay()) > (1024*3*200):
+            client.putPixels(0, np.zeros_like(pixels.getArrayForDisplay()))
+            break
+        else:
+            client.putPixels(0, pixels.getArrayForDisplay())
         time.sleep(waitTime)
     # clear old stars
     for i in range(0,int(20/waitTime)):
