@@ -88,7 +88,7 @@ class Stream:
                                   channels=1,
                                   rate=MIC_RATE,
                                   input=True, 
-                                  frames_per_buffer=2*self.framesPerBuffer)
+                                  frames_per_buffer=self.framesPerBuffer)
         # set parameters for taking spectra later
         # Pad the sample with zeros until n = 2^i where i is an integer
         self.nZeros = 2**int(np.ceil(np.log2(self.nSamples))) - self.nSamples
@@ -112,12 +112,13 @@ class Stream:
         Returns True if reading the stream suceeded, False if the buffer overflowed.
         '''
         try:
-            self.newMicData = np.fromstring(self.stream.read(self.framesPerBuffer), dtype=np.int16)
-            self.newMicData = self.newMicData.astype(np.float32)
-            self.micData = np.roll(self.micData, -self.framesPerBuffer)
-            self.micData[(self.nBuffers-1)*self.framesPerBuffer:(self.nBuffers)*self.framesPerBuffer] = self.newMicData
-            print('successfully got data from audio stream')
-            self.frameCount += 1
+            x = self.stream.read(self.framesPerBuffer*10)
+            #self.newMicData = np.fromstring(self.stream.read(self.framesPerBuffer), dtype=np.int16)
+            #self.newMicData = self.newMicData.astype(np.float32)
+            #self.micData = np.roll(self.micData, -self.framesPerBuffer)
+            #self.micData[(self.nBuffers-1)*self.framesPerBuffer:(self.nBuffers)*self.framesPerBuffer] = self.newMicData
+            #print('successfully got data from audio stream')
+            #self.frameCount += 1
             returnVal=True
         except IOError:
             self.overflows += 1
