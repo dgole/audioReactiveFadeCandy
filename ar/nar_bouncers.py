@@ -32,7 +32,7 @@ class Bouncer :
         self.locFloat = self.locFloat + self.speed
         if int(self.locFloat) != self.locInt:
             self.locInt = int(self.locFloat)
-            self.outArray = np.roll(self.outArray, int(np.sign(self.speed)))
+            self.outArray = np.roll(self.outArray, int(np.sign(self.speed)), axis=0)
         if self.locInt == self.n or self.locInt == self.nPixels-1-self.n:
             self.speed = -self.speed            
     def getFullOutArray(self):
