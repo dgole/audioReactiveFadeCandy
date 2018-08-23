@@ -56,7 +56,7 @@ while True:
         bouncerList[i].update()
     pixels.update(theoStrip, 0.5, 0.5)
     print((pixels.getArrayForDisplay())[0:64,0])
-    #client.putPixels(0, pixels.getArrayForDisplay())
+    client.putPixels(0, pixels.getArrayForDisplay())
     #time.sleep(0.01)
 
 
