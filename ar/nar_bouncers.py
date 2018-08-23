@@ -19,7 +19,7 @@ class Bouncer :
     	self.nPixels = nPixels
         self.locInt = 10
         self.locFloat = float(self.locInt)
-        self.outArray = np.zeros(nPixels, 3)
+        self.outArray = np.zeros([nPixels, 3])
         self.outZeros = np.zeros_like(self.outArray)
         for i in range(self.locInt-self.n, self.locInt+self.n+1):
             if i == self.locInt:
