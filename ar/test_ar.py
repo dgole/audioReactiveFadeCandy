@@ -23,6 +23,6 @@ while True:
     if success:
         power = np.sum(stream.noteSpectrum[4:20])
         print(power)
-        theoStrip[:,0] = power/50
+        theoStrip[:,0] = power/1.0
         pixels.update(theoStrip, 0.7, 0.1)
         client.putPixels(0, pixels.getArrayForDisplay())
