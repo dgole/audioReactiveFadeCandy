@@ -9,23 +9,17 @@ import functionLib as lib
 nStrips = 16
 lStrip  = 64
 
-client = fastopc.FastOPC('localhost:7890')
+#client = fastopc.FastOPC('localhost:7890')
 
-n = 1
-dir = 1
 pixels = lib.Pixels(nStrips, lStrip, 20)
-theoStrip = np.zeros([lStrip*nStrips,3])
-color=2
-theoStrip[n,color] = 255
+theoStrips = []
+for n in range(100): 
+    theoStrips.append(np.zeros_like(pixels.getArrayForDisplay))
 
+nFrame = 0
 while True:
-    if n == (nStrips*lStrip-1):
-        dir *=-1
-    elif n == 0:
-        dir*=-1
-        theoStrip=np.roll(theoStrip, 1, axis=1)
-    theoStrip = np.roll(theoStrip, dir*129, axis=0)
-    pixels.update(theoStrip, 0.7, 0.01)
-    client.putPixels(0, pixels.getArrayForDisplay())
-    n+=dir
+    print(nFrame)
+    pixels.update(theoStrip, 0.7, 0.0)
+    #client.putPixels(0, pixels.getArrayForDisplay())
+    nFrame+=1
     time.sleep(0.01)
