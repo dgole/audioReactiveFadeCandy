@@ -9,7 +9,7 @@ nStrips = 16
 lStrip  = 64
 client = fastopc.FastOPC('localhost:7890')
 
-pixels    = lib.Pixels(nStrips, lStrip, 20)
+pixels    = lib.Pixels(nStrips, lStrip, 0)
 theoStrip = np.zeros([lStrip, 3])
 
 stream = micStream.Stream()
