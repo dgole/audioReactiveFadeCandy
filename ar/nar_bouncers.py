@@ -49,9 +49,9 @@ for i in range(32):
 
 print(bouncerList[0].color)
 print(bouncerList[0].locInt)
-print(bouncerList[0].outArray[0])
-print(bouncerList[0].outArray[1])
-print(bouncerList[0].outArray[2])
+print(bouncerList[0].outArray[:,0])
+print(bouncerList[0].outArray[:,1])
+print(bouncerList[0].outArray[:,2])
 
 
 '''
