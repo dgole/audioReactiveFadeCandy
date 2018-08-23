@@ -78,7 +78,7 @@ class Stream:
         self.nBuffers = nBuffers
         self.overflows = 0
         self.fps = fps
-        self.framesPerBuffer = 2*int(MIC_RATE / self.fps)
+        self.framesPerBuffer = int(MIC_RATE / self.fps)
         # array of zeros that will hold the rolling buffers
         self.micData = np.zeros(self.framesPerBuffer*self.nBuffers, dtype=np.float32)
         self.nSamples = len(self.micData)
