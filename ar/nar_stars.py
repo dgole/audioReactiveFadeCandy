@@ -11,15 +11,18 @@ lStrip  = 64
 
 #client = fastopc.FastOPC('localhost:7890')
 
-pixels = lib.Pixels(nStrips, lStrip, 20)
-theoStrips = []
-for n in range(100): 
-    theoStrips.append(np.zeros_like(pixels.getArrayForDisplay))
+nStars = 50
+pixels = lib.Pixels(nStrips, lStrip, 0)
+theoStrips = np.zeros([nStars, nStrips*lStrip, 3])
 
-nFrame = 0
+
 while True:
-    print(nFrame)
-    pixels.update(theoStrip, 0.7, 0.0)
-    #client.putPixels(0, pixels.getArrayForDisplay())
-    nFrame+=1
-    time.sleep(0.01)
+    positions = np.random.randint(0, high=nStrips*lStrip-1, size=nStars)
+    colors    = np.random.randint(50, 255, size=[nStars,3])
+    for n in range(nStars): theoStrips[n, positions[n]] = colors[n] 
+    for i in range(0,nStars*100):
+        starNum = np.floor(i/100)
+        pixels.update(theoStrips[starNum], 0.05, 0.0)
+        #client.putPixels(0, pixels.getArrayForDisplay())
+        print(pixels.getArrayForDisplay())
+        time.sleep(0.1)
