@@ -14,7 +14,7 @@ theoStrip = np.zeros([lStrip, 3])
 
 stream = micStream.Stream(fps=40, nBuffers=4)
 
-powerSmooth = functionLib.ExpFilter(val=0.1, alpha_rise=0.1, alpha_decay=0.1)
+powerSmooth = lib.ExpFilter(val=0.1, alpha_rise=0.1, alpha_decay=0.1)
 
 while True:
     success = stream.readAndCalc()
