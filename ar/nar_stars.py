@@ -24,10 +24,9 @@ while True:
     # select new values
     positions = np.random.randint(0, high=nStrips*lStrip-1, size=nStars)
     colors    = np.random.randint(0, 255, size=[nStars,3])
-    for n in range(nStars)
-    maxColor  = np.amax(colors[n])
-    colors[n]    = 255*colors[n]/maxColor
-    print(colors)
+    for n in range(nStars):
+        maxColor  = np.amax(colors[n])
+        colors[n]    = 255*colors[n]/maxColor
     for n in range(nStars): theoStrips[n, positions[n]] = colors[n] 
     # bring in new stars
     for i in range(0,nStars*10):
