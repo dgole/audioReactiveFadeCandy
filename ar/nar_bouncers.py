@@ -15,12 +15,10 @@ class Bouncer :
     def __init__(self, n, speed, color, nPixels):
         self.n = n
         self.speed = speed
-        print(color)
         self.color=color/np.amax(color)
-        print(self.color)
         self.color=self.color*255.0
-        print(self.color)
-    	self.nPixels = nPixels
+        for i in range(0,3): self.color[i]=int(self.color[i])
+        self.nPixels = nPixels
         self.locInt = 10
         self.locFloat = float(self.locInt)
         self.outArray = np.zeros([nPixels, 3])
