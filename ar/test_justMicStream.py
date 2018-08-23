@@ -11,7 +11,8 @@ print(stream.framesPerBuffer)
 
 for i in range(0,10):
     print("i=" + str(i))
-    stream.readNewData()
+    #stream.readNewData()
+    stream.stream.read(stream.framesPerBuffer)
     print("marker1")
 
 #print("marker0")
