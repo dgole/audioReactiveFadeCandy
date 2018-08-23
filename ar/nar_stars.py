@@ -27,6 +27,7 @@ while True:
     positions = np.random.randint(0, high=nStrips*lStrip-1, size=nStars)
     colors    = np.random.randint(50, 255, size=[nStars,3])
     for n in range(nStars): theoStrips[n, positions[n]] = colors[n] 
+    for n in range(nStars): print(colors[n]) 
     # bring in new stars
     for i in range(0,nStars*100):
         print(i)
