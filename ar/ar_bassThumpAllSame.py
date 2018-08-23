@@ -14,15 +14,15 @@ theoStrip = np.zeros([lStrip, 3])
 
 stream = micStream.Stream(fps=40, nBuffers=4)
 
-powerSmooth = lib.ExpFilter(val=0.05, alpha_rise=0.05, alpha_decay=0.1)
+powerSmooth = lib.ExpFilter(val=0.05, alpha_rise=0.05, alpha_decay=0.05)
 
 while True:
     success = stream.readAndCalc()
     if success: 
         power = np.sum(stream.freqSpectrum[10//5:300//5])
         powerSmooth.update(power)
-        displayPower = power/powerSmooth.value
+        displayPower = int(100*power/powerSmooth.value)
         theoStrip[:,0] = displayPower
         pixels.update(theoStrip, 0.9, 0.2)
-        print(power, powerSmooth.value)
+        print(displayPower)
         #client.putPixels(0, pixels.getArrayForDisplay())
