@@ -15,7 +15,7 @@ theoStrip = np.zeros([lStrip, 3])
 stream = micStream.Stream(fps=40, nBuffers=4)
 
 powerSmooth = lib.ExpFilter(val=0.05, alpha_rise=0.05, alpha_decay=0.05)
-nColorWheel = 1500
+nColorWheel = 300
 colorWheel = lib.getColorWheel(nColorWheel)
 frameCount = 0
 
