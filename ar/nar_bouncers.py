@@ -23,9 +23,9 @@ class Bouncer :
         self.outZeros = np.zeros_like(self.outArray)
         for i in range(self.locInt-self.n, self.locInt+self.n+1):
             if i == self.locInt:
-                self.outArray[i] = color
+                self.outArray[i] = self.color
             else:
-                self.outArray[i] = color
+                self.outArray[i] = self.color
     def update(self):
         self.locFloat = self.locFloat + self.speed
         if int(self.locFloat) != self.locInt:
