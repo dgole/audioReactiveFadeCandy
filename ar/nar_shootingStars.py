@@ -22,14 +22,16 @@ while True:
     if np.random.rand()<chance:
         waitTimeThisStar = np.random.rand() * waitTimeMultiplier
         dir       = np.random.choice([-1,1])
+        strip     = np.random.randint(0,high=nStrips)
         pos       = np.random.randint(1, high=lStrip-1)
         color     = np.random.randint(0, 255, size=3)
         theoStrip = zeroStrip
-        theoStrip[pos] = color
+        theoStrip[strip*lStrip+pos] = color
         for i in range(0, 64):
             modNum = np.mod(pos, 128)
             if modNum == 0 or modNum == 63 or modNum == 64 or modNum == 127:
                 pixels.update(zeroStrip, 1.0, 1.0)
+                break
             else:
                 pos+=dir
                 theoStrip = np.roll(theoStrip, dir, axis=0)
