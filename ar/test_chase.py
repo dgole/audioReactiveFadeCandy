@@ -15,6 +15,7 @@ n = 1
 dir = 1
 pixels = lib.Pixels(nStrips, lStrip, 20)
 theoStrip = np.zeros([lStrip*nStrips,3])
+client.putPixels(0,theoStrip)
 color=2
 theoStrip[n,color] = 255
 
