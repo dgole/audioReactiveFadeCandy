@@ -21,5 +21,5 @@ stream = micStream.Stream()
 while True:
     success = stream.readAndCalc()
     if success:
-        power = np.sum(stream.noteSpectrum[4:20]
+        power = np.sum(stream.noteSpectrum[4:20])
         print(power)
