@@ -20,7 +20,7 @@ waitBetweenChances = 0.05
 while True:
     if np.random.rand()<chance:
         waitTimeThisStar = np.random.rand() * 0.1
-        dir       = np.random.choice(-1,1)
+        dir       = np.random.choice([-1,1])
         pos       = np.random.randint(1, high=lStrip-1)
         color     = np.random.randint(0, 255, size=3)
         theoStrip = zeroStrip
