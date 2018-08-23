@@ -18,6 +18,7 @@ nStars = 200
 pixels = lib.Pixels(nStrips, lStrip, 0)
 theoStrips = np.zeros([nStars, nStrips*lStrip, 3])
 zeroStrip = np.zeros_like(pixels.getArrayForDisplay())
+client.putPixels(zeroStrip)
 
 while True:
     # select new values
