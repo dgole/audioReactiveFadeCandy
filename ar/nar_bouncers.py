@@ -49,7 +49,7 @@ for i in range(32):
 
 while True:
     for i in range(0,nBouncers):
-        stripNum = np.mod(nBouncer, nStrips)
+        stripNum = np.mod(i, nStrips)
         base = stripNum*lStrip
         theoStrip[base:base+lStrip] = bouncerList[i].getFullOutArray()
         bouncerList[i].update()
