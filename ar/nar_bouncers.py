@@ -51,6 +51,7 @@ for i in range(32):
 while True:
     for i in range(0,nBouncers):
         stripNum = np.mod(i, nStrips)
+        print(i, stripNum)
         base = stripNum*lStrip
         theoStrip[base:base+lStrip] = bouncerList[i].getFullOutArray()
         bouncerList[i].update()
