@@ -24,5 +24,5 @@ while True:
         displayPower = int(150*power/powerSmooth.value)
         theoStrip[:,0] = displayPower
         pixels.update(theoStrip, 0.9, 0.2)
-        print(displayPower)
+        #print(displayPower)
         client.putPixels(0, pixels.getArrayForDisplay())
