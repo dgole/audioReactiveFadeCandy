@@ -43,14 +43,14 @@ pixels = lib.Pixels(nStrips, lStrip, 20)
 theoStrip = np.zeros([nStrips*lStrip, 3])
 
 bouncerList = []
-bouncerList.append(Bouncer(5, 0.1,   (10,0,7), 64))
-bouncerList.append(Bouncer(5, 0.101, (10,0,8), 64))
-bouncerList.append(Bouncer(5, 0.102, (10,0,9), 64))
-bouncerList.append(Bouncer(5, 0.103, (10,0,10), 64))
-bouncerList.append(Bouncer(5, 0.104, (10,0,10), 64))
-bouncerList.append(Bouncer(5, 0.105, (9,0,10), 64))
-bouncerList.append(Bouncer(5, 0.106, (8,0,10), 64))
-bouncerList.append(Bouncer(5, 0.107, (7,0,10), 64))
+bouncerList.append(Bouncer(5, 0.1,   (100,0,94), 64))
+bouncerList.append(Bouncer(5, 0.101, (100,0,96), 64))
+bouncerList.append(Bouncer(5, 0.102, (100,0,98), 64))
+bouncerList.append(Bouncer(5, 0.103, (100,0,100), 64))
+bouncerList.append(Bouncer(5, 0.104, (100,0,100), 64))
+bouncerList.append(Bouncer(5, 0.105, (98,0,100), 64))
+bouncerList.append(Bouncer(5, 0.106, (96,0,100), 64))
+bouncerList.append(Bouncer(5, 0.107, (94,0,100), 64))
 
 
 while True:
