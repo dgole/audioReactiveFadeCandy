@@ -9,7 +9,7 @@ stream = micStream.Stream(fps=10, nBuffers=1)
 print(stream.fps)
 print(stream.framesPerBuffer)
 
-time.sleep(1)
+time.sleep(10)
 
 stream.stopStream()
 
