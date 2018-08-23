@@ -14,7 +14,7 @@ lStrip  = 64
 pixels = lib.Pixels(nStrips, lStrip, 20)
 zeroStrip = np.zeros_like(pixels.getArrayForDisplay())
 
-chance = 0.01
+chance = 0.05
 waitBetweenChances = 0.05
 
 while True:
