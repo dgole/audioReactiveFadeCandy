@@ -44,12 +44,7 @@ theoStrip = np.zeros([nStrips*lStrip, 3])
 bouncerList = []
 for i in range(32): 
     bouncerList.append(Bouncer(np.random.randint(1,high=8), np.random.rand()*0.3+0.05, np.random.randint(0, 255, size=3), 64))
-
-print(bouncerList[0].color)
-print(bouncerList[0].locInt)
-print(bouncerList[0].outArray[:,0])
-print(bouncerList[0].outArray[:,1])
-print(bouncerList[0].outArray[:,2])
+    print(bouncerList[i].color)
 
 
 '''
