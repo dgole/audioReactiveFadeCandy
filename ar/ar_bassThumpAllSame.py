@@ -21,8 +21,8 @@ while True:
     if success: 
         power = np.sum(stream.freqSpectrum[30//5:300//5])
         powerSmooth.update(power)
-        displayPower = power/powerSmooth
+        displayPower = power/powerSmooth.value
         theoStrip[:,0] = displayPower
         pixels.update(theoStrip, 0.9, 0.2)
-        print(power/powerSmooth.value)
+        print(displayPower)
         #client.putPixels(0, pixels.getArrayForDisplay())
