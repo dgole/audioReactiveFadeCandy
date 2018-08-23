@@ -13,8 +13,8 @@ stream = micStream.Stream(fps=1, nBuffers=1)
 
 for i in range(0,10):
     print("i=" + str(i))
-    #stream.readNewData()
-    stream.stream.read(2*stream.framesPerBuffer)
+    stream.readNewData()
+    #stream.stream.read(2*stream.framesPerBuffer)
     print("marker1")
 
 
