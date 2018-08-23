@@ -34,7 +34,11 @@ while True:
                 pos+=dir
                 theoStrip = np.roll(theoStrip, dir, axis=0)
                 pixels.update(theoStrip, 1.0, 0.1)
-                client.putPixels(0, pixels.getArrayForDisplay())
+                if np.sum(pixels.getArrayForDisplay()) > (1024*3*200):
+                    client.putPixels(0, np.zeros_like(pixels.getArrayForDisplay()))
+                    break
+                else:
+                    client.putPixels(0, pixels.getArrayForDisplay())
                 time.sleep(waitTimeThisStar)
     time.sleep(waitBetweenChances)
 
