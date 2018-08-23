@@ -39,20 +39,28 @@ class Bouncer :
         returnArray = self.outArray 
         return returnArray.astype(int)
 
-nBouncers = 32
 pixels = lib.Pixels(nStrips, lStrip, 20)
 theoStrip = np.zeros([nStrips*lStrip, 3])
 
+nBouncers=8
 bouncerList = []
-for i in range(32): 
-    bouncerList.append(Bouncer(np.random.randint(1,high=8), np.random.rand()*0.3+0.05, np.random.rand(3), 64))
+bouncerList.append(Bouncer(5, 0.1, (7,0,0), 64))
+bouncerList.append(Bouncer(5, 0.1, (6,0,1), 64))
+bouncerList.append(Bouncer(5, 0.1, (5,0,2), 64))
+bouncerList.append(Bouncer(5, 0.1, (4,0,3), 64))
+bouncerList.append(Bouncer(5, 0.1, (3,0,4), 64))
+bouncerList.append(Bouncer(5, 0.1, (2,0,5), 64))
+bouncerList.append(Bouncer(5, 0.1, (1,0,6), 64))
+bouncerList.append(Bouncer(5, 0.1, (0,0,7), 64))
 
 
 while True:
     for i in range(0,nBouncers):
         stripNum = np.mod(i, nStrips)
-        base = stripNum*lStrip
+        base = stripNum*lStrip*2
         theoStrip[base:base+lStrip] = bouncerList[i].getFullOutArray()
+        base = stripNum*lStrip
+        theoStrip[base+lStrip:base+2*lStrip] = bouncerList[i].getFullOutArray()
         bouncerList[i].update()
     pixels.update(theoStrip, 0.5, 0.5)
     #print((pixels.getArrayForDisplay())[0:64,0])
