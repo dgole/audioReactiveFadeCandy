@@ -86,10 +86,9 @@ class Stream:
         self.p = pyaudio.PyAudio()
         self.stream = self.p.open(format=pyaudio.paInt16,
                                   channels=1,
-                                  rate=44100,
+                                  rate=MIC_RATE,
                                   input=True, 
-                                  frames_per_buffer=8192)
-                                  #frames_per_buffer=self.framesPerBuffer)
+                                  frames_per_buffer=self.framesPerBuffer)
         # set parameters for taking spectra later
         # Pad the sample with zeros until n = 2^i where i is an integer
         self.nZeros = 2**int(np.ceil(np.log2(self.nSamples))) - self.nSamples
