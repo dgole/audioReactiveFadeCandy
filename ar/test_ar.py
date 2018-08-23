@@ -16,11 +16,11 @@ stream = micStream.Stream(fps=40, nBuffers=4)
 
 while True:
     success = stream.readAndCalc()
-    if success:
+    if success: 
         power = np.sum(stream.freqSpectrum[30//5:300//5])
         print(power)
         print(stream.freqs)
         print(stream.notes)
         theoStrip[:,0] = power/1.0
-        pixels.update(theoStrip, 0.9, 0.9)
+        pixels.update(theoStrip, 0.9, 0.2)
         client.putPixels(0, pixels.getArrayForDisplay())
