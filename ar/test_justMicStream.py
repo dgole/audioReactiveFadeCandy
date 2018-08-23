@@ -5,15 +5,15 @@ import numpy as np
 #import functionLib as lib
 import micStream
 
-stream = micStream.Stream(fps=10, nBuffers=1)
+stream = micStream.Stream(fps=1, nBuffers=1)
 print(stream.fps)
 print(stream.framesPerBuffer)
 
-time.sleep(10)
-
+print(marker0)
 stream.readNewData()
-
-time.sleep(10)
+print(marker1)
+stream.readNewData()
+print(marker2)
 
 stream.stopStream()
 
