@@ -7,7 +7,7 @@ import micStream
 import pyaudio
 
 
-stream = micStream.Stream(fps=1, nBuffers=1)
+stream = micStream.Stream(fps=30, nBuffers=1)
 #print(stream.fps)
 #print(stream.framesPerBuffer)
 
