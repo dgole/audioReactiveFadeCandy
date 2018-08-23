@@ -47,6 +47,14 @@ bouncerList = []
 for i in range(32): 
     bouncerList.append(Bouncer(np.random.randint(1,high=8), np.random.rand()*0.3+0.05, np.random.randint(0, 255, size=3), 64))
 
+print(bouncerList[0].color)
+print(bouncerList[0].locInt)
+print(bouncerList[0].outArray[0])
+print(bouncerList[0].outArray[1])
+print(bouncerList[0].outArray[2])
+
+
+'''
 while True:
     for i in range(0,nBouncers):
         stripNum = np.mod(i, nStrips)
@@ -57,3 +65,5 @@ while True:
     print((pixels.getArrayForDisplay())[0:64])
     #client.putPixels(0, pixels.getArrayForDisplay())
     #time.sleep(0.01)
+'''
+
