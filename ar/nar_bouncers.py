@@ -55,8 +55,12 @@ while True:
         base = stripNum*lStrip
         theoStrip[base:base+lStrip] = bouncerList[i].getFullOutArray() + bouncerList[i+16].getFullOutArray()
     pixels.update(theoStrip, 0.5, 0.5)
-    #print((pixels.getArrayForDisplay())[0:64,0])
-    client.putPixels(0, pixels.getArrayForDisplay())
+    #print((pixels.getArrayForDisplay())[0:64,0])    
+    if np.sum(pixels.getArrayForDisplay()) > (1024*3*200):
+        client.putPixels(0, np.zeros_like(pixels.getArrayForDisplay()))
+        break
+    else:
+        client.putPixels(0, pixels.getArrayForDisplay())
     #time.sleep(0.01)
 
 
