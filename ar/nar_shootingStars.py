@@ -29,7 +29,7 @@ while True:
         for i in range(0, 64):
             modNum = np.mod(pos, 128)
             if modNum == 0 or modNum == 63 or modNum == 64 or modNum == 127:
-                pixels.update(zeroStrip, 1.0, 0.1)
+                pixels.update(zeroStrip, 1.0, 1.0)
             else:
                 pos+=dir
                 theoStrip = np.roll(theoStrip, dir, axis=0)
