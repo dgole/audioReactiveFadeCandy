@@ -31,6 +31,7 @@ while True:
             modNum = np.mod(pos, 128)
             if modNum == 0 or modNum == 63 or modNum == 64 or modNum == 127:
                 pixels.update(zeroStrip, 1.0, 1.0)
+                client.putPixels(0, pixels.getArrayForDisplay())
                 break
             else:
                 pos+=dir
