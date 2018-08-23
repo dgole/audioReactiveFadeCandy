@@ -12,10 +12,6 @@ client = fastopc.FastOPC('localhost:7890')
 pixels    = lib.Pixels(nStrips, lStrip, 20)
 theoStrip = np.zeros([lStrip, 3])
 
-theoStrip[:,0] = 100
-pixels.update(theoStrip, 1.0, 0.1)
-client.putPixels(0, pixels.getArrayForDisplay())
-
 stream = micStream.Stream()
 
 while True:
@@ -23,6 +19,8 @@ while True:
     if success:
         power = np.sum(stream.noteSpectrum[4:20])
         print(power)
+        print(stream.freqs)
+        print(stream.notes)
         theoStrip[:,0] = power/1.0
-        pixels.update(theoStrip, 0.7, 0.1)
+        pixels.update(theoStrip, 0.9, 0.9)
         client.putPixels(0, pixels.getArrayForDisplay())
