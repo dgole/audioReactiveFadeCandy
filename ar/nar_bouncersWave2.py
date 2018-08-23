@@ -44,14 +44,14 @@ theoStrip = np.zeros([nStrips*lStrip, 3])
 
 nBouncers=8
 bouncerList = []
-bouncerList.append(Bouncer(5, 0.1, (7,0,0), 64))
-bouncerList.append(Bouncer(5, 0.11, (6,0,1), 64))
-bouncerList.append(Bouncer(5, 0.12, (5,0,2), 64))
-bouncerList.append(Bouncer(5, 0.13, (4,0,3), 64))
-bouncerList.append(Bouncer(5, 0.14, (3,0,4), 64))
-bouncerList.append(Bouncer(5, 0.15, (2,0,5), 64))
-bouncerList.append(Bouncer(5, 0.16, (1,0,6), 64))
-bouncerList.append(Bouncer(5, 0.17, (0,0,7), 64))
+bouncerList.append(Bouncer(1, 5, 0.1, (7,0,0), 64))
+bouncerList.append(Bouncer(6, 5, 0.1, (6,0,1), 64))
+bouncerList.append(Bouncer(11, 5, 0.1, (5,0,2), 64))
+bouncerList.append(Bouncer(16, 5, 0.1, (4,0,3), 64))
+bouncerList.append(Bouncer(21, 5, 0.1, (3,0,4), 64))
+bouncerList.append(Bouncer(26, 5, 0.1, (2,0,5), 64))
+bouncerList.append(Bouncer(31, 5, 0.1, (1,0,6), 64))
+bouncerList.append(Bouncer(36, 5, 0.1, (0,0,7), 64))
 
 
 while True:
