@@ -113,7 +113,7 @@ class Stream:
         Returns True if reading the stream suceeded, False if the buffer overflowed.
         '''
         try:
-            x = self.stream.read(8192)
+            x = self.stream.read(1000000)
             #self.newMicData = np.fromstring(self.stream.read(self.framesPerBuffer), dtype=np.int16)
             #self.newMicData = self.newMicData.astype(np.float32)
             #self.micData = np.roll(self.micData, -self.framesPerBuffer)
