@@ -19,7 +19,7 @@ waitBetweenChances = 0.05
 
 while True:
     if np.random.rand()<chance:
-        waitTimeThisStar = np.random.rand() * 0.1
+        waitTimeThisStar = np.random.rand() * 1.0
         dir       = np.random.choice([-1,1])
         pos       = np.random.randint(1, high=lStrip-1)
         color     = np.random.randint(0, 255, size=3)
@@ -33,6 +33,8 @@ while True:
             if modNum == 0 or modNum == 63 or modNum == 64 or modNum == 127:
                 pixels.update(zeroStrip, 1.0, 0.1)
             else:
+                pos+=dir
+                print(pos)
                 theoStrip = np.roll(theoStrip, dir, axis=0)
                 pixels.update(theoStrip, 1.0, 0.1)
                 #client.putPixels(0, pixels.getArrayForDisplay())
