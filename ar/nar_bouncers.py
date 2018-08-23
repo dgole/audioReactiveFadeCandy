@@ -53,7 +53,7 @@ while True:
         stripNum = np.mod(i, nStrips)
         print(i, stripNum)
         base = stripNum*lStrip
-        theoStrip[base:base+lStrip] = bouncerList[i].getFullOutArray()
+        theoStrip[base:base+lStrip] += bouncerList[i].getFullOutArray()
         bouncerList[i].update()
     pixels.update(theoStrip, 0.5, 0.5)
     #print((pixels.getArrayForDisplay())[0:64,0])
