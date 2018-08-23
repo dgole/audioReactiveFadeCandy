@@ -12,12 +12,12 @@ client = fastopc.FastOPC('localhost:7890')
 pixels    = lib.Pixels(nStrips, lStrip, 0)
 theoStrip = np.zeros([lStrip, 3])
 
-stream = micStream.Stream()
+stream = micStream.Stream(fps=40, nBuffers=8)
 
 while True:
     success = stream.readAndCalc()
     if success:
-        power = np.sum(stream.noteSpectrum[4:20])
+        power = np.sum(stream.noteSpectrum[0:20])
         print(power)
         print(stream.freqs)
         print(stream.notes)
