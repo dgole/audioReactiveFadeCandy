@@ -40,7 +40,7 @@ class Bouncer :
 
 nBouncers = 32
 pixels = lib.Pixels(nStrips, lStrip, 20)
-theoStrip = np.zeros([nStrips*lStrips, 3])
+theoStrip = np.zeros([nStrips*lStrip, 3])
 
 bouncerList = []
 for i in range(32): 
