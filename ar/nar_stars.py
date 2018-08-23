@@ -31,6 +31,7 @@ while True:
     # bring in new stars
     for i in range(0,nStars*10):
         starNum = np.floor(i/10)
+        print(colors[starNum])
         pixels.update(theoStrips[starNum], 0.2, 0.0)
         client.putPixels(0, pixels.getArrayForDisplay())
         time.sleep(waitTime)
