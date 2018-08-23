@@ -46,9 +46,8 @@ theoStrip = np.zeros([nStrips*lStrip, 3])
 bouncerList = []
 for i in range(32): 
     bouncerList.append(Bouncer(np.random.randint(1,high=8), np.random.rand()*0.3+0.05, np.random.rand(3), 64))
-    print(bouncerList[i].color)
 
-'''
+
 while True:
     for i in range(0,nBouncers):
         stripNum = np.mod(i, nStrips)
@@ -56,8 +55,8 @@ while True:
         theoStrip[base:base+lStrip] = bouncerList[i].getFullOutArray()
         bouncerList[i].update()
     pixels.update(theoStrip, 0.5, 0.5)
-    print((pixels.getArrayForDisplay())[0:64])
+    print((pixels.getArrayForDisplay())[0:64,0])
     #client.putPixels(0, pixels.getArrayForDisplay())
     #time.sleep(0.01)
-'''
+
 
