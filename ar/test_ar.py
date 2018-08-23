@@ -16,17 +16,15 @@ theoStrip[:,2] = 100
 pixels.update(theoStrip, 1.0, 0.1)
 client.putPixels(0, pixels.getArrayForDisplay())
 
-stream = micStream.Stream(fps=10, nBuffers=2)
-print(stream.fps)
-print(stream.framesPerBuffer)
+stream = micStream.Stream()
 
 print("marker0")
 while True:
     print("marker1")
-    stream.readNewData()
+    success = stream.readAndCalc()
     print("marker2")
-    #if success:
-        #print("marker3")
-        #power = stream.noteSpectrum[10]
-        #print(power)
-        #print("marker4")
+    if success:
+        print("marker3")
+        power = stream.noteSpectrum[10]
+        print(power)
+        print("marker4")
