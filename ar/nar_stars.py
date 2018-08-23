@@ -29,6 +29,7 @@ while True:
     for n in range(nStars): theoStrips[n, positions[n]] = colors[n] 
     # bring in new stars
     for i in range(0,nStars*100):
+        print(i)
         starNum = np.floor(i/100)
         print(starNum)
         pixels.update(theoStrips[starNum], 0.05, 0.0)
