@@ -9,11 +9,11 @@ stream = micStream.Stream(fps=40, nBuffers=4)
 print(stream.fps)
 print(stream.framesPerBuffer)
 
-print(marker0)
+print("marker0")
 stream.readNewData()
-print(marker1)
+print("marker1")
 stream.readNewData()
-print(marker2)
+print("marker2")
 
 stream.stopStream()
 
