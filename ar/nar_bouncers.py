@@ -50,8 +50,8 @@ for i in range(32):
 
 while True:
     for i in range(0,nBouncers): bouncerList[i].update()
-    for i in range(0,nBouncers):
-        stripNum = np.mod(i, nStrips)
+    for i in range(0,16):
+        stripNum = i
         base = stripNum*lStrip
         theoStrip[base:base+lStrip] = bouncerList[i].getFullOutArray() + bouncerList[i+16].getFullOutArray()
     pixels.update(theoStrip, 0.5, 0.5)
