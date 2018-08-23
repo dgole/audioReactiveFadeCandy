@@ -35,7 +35,7 @@ class Bouncer :
         if self.locInt == self.n or self.locInt == self.nPixels-1-self.n:
             self.speed = -self.speed            
     def getFullOutArray(self):
-	    returnArray = self.outArray 
+        returnArray = self.outArray 
         return returnArray.astype(int)
 
 nBouncers = 32
