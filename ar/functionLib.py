@@ -56,19 +56,19 @@ class ExpFilter:
     
     
 def getColorWheel(nTot):
-    colorWheel = np.zeros([3, nTot])
+    colorWheel = np.zeros([nTot,3])
     nTot3 = nTot//3
     for n in range(nTot):
         if n < nTot3:
-            colorWheel[0,n] = 1.0 - float(n)/float(nTot3)
-            colorWheel[1,n] = 0.0 + float(n)/float(nTot3)
-            colorWheel[2,n] = 0.0
+            colorWheel[n,0] = 1.0 - float(n)/float(nTot3)
+            colorWheel[n,1] = 0.0 + float(n)/float(nTot3)
+            colorWheel[n,2] = 0.0
         elif nTot3 < n < 2*nTot3:
-            colorWheel[0,n] = 0.0
-            colorWheel[1,n] = 1.0 - float(n-nTot3)/float(nTot3)
-            colorWheel[2,n] = 0.0 + float(n-nTot3)/float(nTot3)
+            colorWheel[n,0] = 0.0
+            colorWheel[n,1] = 1.0 - float(n-nTot3)/float(nTot3)
+            colorWheel[n,2] = 0.0 + float(n-nTot3)/float(nTot3)
         elif 2*nTot3 < n < nTot:
-            colorWheel[0,n] = 0.0 + float(n-2*nTot3)/float(nTot3)
-            colorWheel[1,n] = 0.0
-            colorWheel[2,n] = 1.0 - float(n-2*nTot3)/float(nTot3)
+            colorWheel[n,0] = 0.0 + float(n-2*nTot3)/float(nTot3)
+            colorWheel[n,1] = 0.0
+            colorWheel[n,2] = 1.0 - float(n-2*nTot3)/float(nTot3)
     return colorWheel
