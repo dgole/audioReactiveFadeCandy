@@ -4,21 +4,21 @@ import fastopc, time
 import numpy as np
 #import functionLib as lib
 import micStream
+import pyaudio
 
-'''
+
 stream = micStream.Stream(fps=40, nBuffers=1)
-print(stream.fps)
-print(stream.framesPerBuffer)
+#print(stream.fps)
+#print(stream.framesPerBuffer)
 
 for i in range(0,10):
     print("i=" + str(i))
-    #stream.readNewData()
-    stream.stream.read(stream.framesPerBuffer)
+    stream.readNewData()
+    #stream.stream.read(stream.framesPerBuffer)
     print("marker1")
+
+
 '''
-
-import pyaudio
-
 # audio setup
 CHUNK = 8192    # input buffer size in frames
 FORMAT = pyaudio.paInt16
@@ -43,7 +43,7 @@ for rate in RATES:
     stream.stop_stream()
     stream.close()
 p.terminate()
-
+'''
 
 
 
