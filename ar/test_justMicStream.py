@@ -22,7 +22,7 @@ import pyaudio
 # audio setup
 CHUNK = 8192    # input buffer size in frames
 FORMAT = pyaudio.paInt16
-CHANNELS = 2
+CHANNELS = 1
 RATES = (96000, 88200, 48000, 44100, 32000, 24000)
 # open sound card data stream
 npoints = 1000000
