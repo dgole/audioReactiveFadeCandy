@@ -26,7 +26,7 @@ while True:
         power = np.sum(stream.freqSpectrum[10//5:300//5])
         powerSmooth.update(power)
         displayPower = int(122*power/powerSmooth.value)
-        theoStrip[:,0] = displayPower * colorWheel[frameNumEff]
+        theoStrip[:] = displayPower * colorWheel[:, frameNumEff]
         pixels.update(theoStrip, 0.9, 0.2)
         print(displayPower * colorWheel[frameNumEff])
         #client.putPixels(0, pixels.getArrayForDisplay())
