@@ -17,8 +17,7 @@ client = fastopc.FastOPC('localhost:7890')
 # 100s per cycle
 # clear time of 500 cycles at same cadence = 10s
 
-waitTime = 0.02
-nStars = 50
+nStars = 200
 pixels = lib.Pixels(nStrips, lStrip, 0)
 theoStrips = np.zeros([nStars, nStrips*lStrip, 3])
 zeroStrip = np.zeros_like(pixels.getArrayForDisplay())
@@ -29,7 +28,7 @@ while True:
     colors    = np.random.randint(0, 255, size=[nStars,3])
     for n in range(nStars): theoStrips[n, positions[n]] = colors[n] 
     # bring in new stars
-    for i in range(0,nStars*100):
+    for i in range(0,nStars*50):
         starNum = np.floor(i/100)
         print(starNum)
         pixels.update(theoStrips[starNum], 0.05, 0.0)
