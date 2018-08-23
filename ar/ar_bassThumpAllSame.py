@@ -7,7 +7,7 @@ import micStream
 
 nStrips = 16
 lStrip  = 64
-#client = fastopc.FastOPC('localhost:7890')
+client = fastopc.FastOPC('localhost:7890')
 
 pixels    = lib.Pixels(nStrips, lStrip, 0)
 theoStrip = np.zeros([lStrip, 3])
@@ -25,4 +25,4 @@ while True:
         theoStrip[:,0] = displayPower
         pixels.update(theoStrip, 0.9, 0.2)
         print(displayPower)
-        #client.putPixels(0, pixels.getArrayForDisplay())
+        client.putPixels(0, pixels.getArrayForDisplay())
