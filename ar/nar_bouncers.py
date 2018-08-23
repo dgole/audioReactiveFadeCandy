@@ -15,9 +15,11 @@ class Bouncer :
     def __init__(self, n, speed, color, nPixels):
         self.n = n
         self.speed = speed
+        print(color)
         self.color=color/np.amax(color)
-        self.color=self.color*255
-        print(np.amax(self.color))
+        print(self.color)
+        self.color=self.color*255.0
+        print(self.color)
     	self.nPixels = nPixels
         self.locInt = 10
         self.locFloat = float(self.locInt)
@@ -45,8 +47,7 @@ theoStrip = np.zeros([nStrips*lStrip, 3])
 
 bouncerList = []
 for i in range(32): 
-    bouncerList.append(Bouncer(np.random.randint(1,high=8), np.random.rand()*0.3+0.05, np.random.randint(0, 255, size=3), 64))
-    print(bouncerList[i].color)
+    bouncerList.append(Bouncer(np.random.randint(1,high=8), np.random.rand()*0.3+0.05, np.random.rand(0, 1, size=3), 64))
 
 
 '''
