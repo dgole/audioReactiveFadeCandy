@@ -11,6 +11,10 @@ print(stream.framesPerBuffer)
 
 time.sleep(10)
 
+stream.readNewData()
+
+time.sleep(10)
+
 stream.stopStream()
 
 #print("marker0")
