@@ -15,7 +15,7 @@ class Bouncer :
     def __init__(self, n, speed, color, nPixels):
         self.n = n
         self.speed = speed
-        self.color*=255/np.amax(color)
+        self.color=color*(255/np.amax(color))
     	self.nPixels = nPixels
         self.locInt = 10
         self.locFloat = float(self.locInt)
