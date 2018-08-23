@@ -17,7 +17,7 @@ stream = micStream.Stream(fps=40, nBuffers=4)
 while True:
     success = stream.readAndCalc()
     if success:
-        power = np.sum(stream.freqSpectrum[30//5:120//5])
+        power = np.sum(stream.freqSpectrum[30//5:300//5])
         print(power)
         print(stream.freqs)
         print(stream.notes)
