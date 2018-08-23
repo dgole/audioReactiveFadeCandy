@@ -21,8 +21,11 @@ while True:
     colors    = np.random.randint(50, 255, size=[nStars,3])
     for n in range(nStars): theoStrips[n, positions[n]] = colors[n] 
     for i in range(0,nStars*100):
+        print(i)
         starNum = np.floor(i/100)
+        print(starNum)
         pixels.update(theoStrips[starNum], 0.05, 0.0)
         #client.putPixels(0, pixels.getArrayForDisplay())
         print(pixels.getArrayForDisplay())
+        print(pixels.getArrayForDisplay()[positions[starNum]])
         time.sleep(0.1)
