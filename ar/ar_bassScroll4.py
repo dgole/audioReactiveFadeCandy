@@ -16,7 +16,7 @@ stream = micStream.Stream(fps=30, nBuffers=4)
 
 powerSmooth = lib.ExpFilter(val=0.05, alpha_rise=0.05, alpha_decay=0.05)
 nColorWheel = 300
-nOnOneStrip = 20
+nOnOneStrip = 64
 colorWheel = lib.getColorWheel(nColorWheel)
 frameCount = 0
 
