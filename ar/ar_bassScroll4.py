@@ -24,7 +24,7 @@ while True:
     success = stream.readAndCalc()
     if success:
         frameNumEff  = np.mod(frameCount, nColorWheel)
-        stripNum     = np.mod(np.floor(frameNumEff/nOnOneStrip),nStrip//2)
+        stripNum     = np.mod(np.floor(frameNumEff/nOnOneStrip),nStrips//2)
         print(stripNum)
         power = np.sum(stream.freqSpectrum[20//7:250//7])
         powerSmooth.update(power)
