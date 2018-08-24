@@ -39,5 +39,5 @@ while True:
         pixels.update(theo, 0.7, 0.1)
         #print(width)
         #print(displayPower * colorWheel[frameNumEff])
-        client.putPixels(0, brightNessFactor*pixels.getArrayForDisplay())
+        client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
         frameCount+=1
