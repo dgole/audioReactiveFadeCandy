@@ -13,7 +13,7 @@ pixels    = lib.Pixels(nStrips, lStrip, 0)
 theoStrip = np.zeros([lStrip, 3])
 theo      = np.zeros([nStrips*lStrip, 3])
 
-stream = micStream.Stream(fps=30, nBuffers=5)
+stream = micStream.Stream(fps=30, nBuffers=6)
 
 powerSmooth = lib.ExpFilter(val=0.05, alpha_rise=0.05, alpha_decay=0.05)
 nColorWheel = 1500
@@ -29,8 +29,8 @@ while True:
         displayPower = int(122*power/powerSmooth.value)       
         width = int(5 + np.sqrt(float(displayPower)))
         for i in range(8):
-            theoStrip = displayPower * colorWheel[np.mod(frameNumEff+50*i+500,nColorWheel)]
-            theoStrip[0:width] +=  255 * colorWheel[np.mod(frameNumEff+50*i,nColorWheel)]
+            theoStrip[width:] = displayPower * colorWheel[np.mod(frameNumEff+50*i+500,nColorWheel)]
+            theoStrip[0:width] =  255 * colorWheel[np.mod(frameNumEff+50*i,nColorWheel)]
             theo[(2*i+0)*lStrip:(2*i+1)*lStrip] = theoStrip
             theo[(2*i+1)*lStrip:(2*i+2)*lStrip] = theoStrip 
         pixels.update(theo, 0.7, 0.1)
