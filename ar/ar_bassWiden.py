@@ -29,8 +29,8 @@ while True:
         displayPower = int(122*power/powerSmooth.value)       
         width = int(5 + np.sqrt(float(displayPower)))
         for i in range(8):
-            theoStrip[0:width] =  255 * colorWheel[frameNumEff-nColorWheel//8]
-            theoStrip[width:]  = displayPower * colorWheel[frameNumEff-nColorWheel//8-nColorWheel//2]
+            theoStrip[0:width] =  255 * colorWheel[frameNumEff-(nColorWheel//8)*i]
+            theoStrip[width:]  = displayPower * colorWheel[frameNumEff-((nColorWheel//8)*i)-nColorWheel//2]
             theo[(2*i+0)*lStrip:(2*i+1)*lStrip] = theoStrip
             theo[(2*i+1)*lStrip:(2*i+2)*lStrip] = theoStrip 
         pixels.update(theoStrip, 0.7, 0.1)
