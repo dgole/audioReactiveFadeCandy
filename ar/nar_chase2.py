@@ -5,6 +5,10 @@
 import fastopc, time
 import numpy as np
 import functionLib as lib
+import sys
+
+if len(sys.argv) == 1: brightnessFactor = 1.0
+else: brightnessFactor = float(sys.argv[1])
 
 nStrips = 16
 lStrip  = 64
@@ -26,10 +30,6 @@ while True:
         theoStrip=np.roll(theoStrip, 1, axis=1)
     theoStrip = np.roll(theoStrip, dir*129, axis=0)
     pixels.update(theoStrip, 1.0, 0.01)
-    if np.sum(pixels.getArrayForDisplay()) > (1024*3*200):
-        client.putPixels(0, np.zeros_like(pixels.getArrayForDisplay()))
-        break
-    else:
-        client.putPixels(0, pixels.getArrayForDisplay())
+    client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
     n+=dir
     time.sleep(0.01)
