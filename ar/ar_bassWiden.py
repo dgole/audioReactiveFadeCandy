@@ -23,13 +23,13 @@ while True:
     success = stream.readAndCalc()
     if success:
         frameNumEff = np.mod(frameCount, nColorWheel)
-        power = np.sum(stream.freqSpectrum[10//5:300//5])
+        power = np.sum(stream.freqSpectrum[10//5:200//5])
         powerSmooth.update(power)
         displayPower = int(122*power/powerSmooth.value)       
         width = int(5 + np.sqrt(float(displayPower)))
         theoStrip[0:width] =  255 * colorWheel[frameNumEff-nColorWheel//2]
         theoStrip[width:]  = displayPower * colorWheel[frameNumEff]
-        pixels.update(theoStrip, 0.9, 0.1)
+        pixels.update(theoStrip, 0.7, 0.1)
         print(width)
         print(displayPower * colorWheel[frameNumEff])
         client.putPixels(0, pixels.getArrayForDisplay())
