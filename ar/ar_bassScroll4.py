@@ -26,7 +26,7 @@ while True:
         frameNumEff  = np.mod(frameCount, nColorWheel)
         frameNumEff2 = np.mod(frameCount, nOnOneStrip*nStrips//2)
         stripNum     = np.mod(frameNumEff, nStrips//2)
-        power = np.sum(stream.freqSpectrum[10//5:300//5])
+        power = np.sum(stream.freqSpectrum[20//7:250//7])
         powerSmooth.update(power)
         displayPower = int(122*np.power(power/powerSmooth.value,1.5))
         
@@ -38,7 +38,7 @@ while True:
         theo[stripNum*2*lStrip] = displayPower * colorWheel[frameNumEff]
         theo[stripNum*2*lStrip + lStrip] = displayPower * colorWheel[frameNumEff]
         
-        pixels.update(theo, 1.0, 1.0)
+        pixels.update(theo, 1.0, 0.1)
         #print(displayPower * colorWheel[frameNumEff])
         client.putPixels(0, pixels.getArrayForDisplay())
         frameCount+=1
