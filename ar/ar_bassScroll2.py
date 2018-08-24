@@ -14,7 +14,7 @@ theo      = np.zeros([nStrips*lStrip, 3])
 
 stream = micStream.Stream(fps=30, nBuffers=4)
 
-powerSmooth = lib.ExpFilter(val=0.05, alpha_rise=0.02, alpha_decay=0.02)
+powerSmooth = lib.ExpFilter(val=0.05, alpha_rise=0.01, alpha_decay=0.01)
 nColorWheel = 300
 colorWheel = lib.getColorWheel(nColorWheel)
 frameCount = 0
@@ -28,7 +28,7 @@ while True:
         displayPower = int(122*np.power(power/powerSmooth.value,1.5))
         theo = np.roll(theo, 128, axis=0)
         theo[0:128] = displayPower * colorWheel[frameNumEff]
-        pixels.update(theo, 1.0, 0.2)
+        pixels.update(theo, 0.7, 0.1)
         #print(displayPower * colorWheel[frameNumEff])
         client.putPixels(0, pixels.getArrayForDisplay())
         frameCount+=1
