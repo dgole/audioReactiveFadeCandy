@@ -5,6 +5,7 @@
 import fastopc, time
 import numpy as np
 import functionLib as lib
+import sys
 
 nStrips = 16
 lStrip  = 64
