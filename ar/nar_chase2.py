@@ -25,7 +25,7 @@ while True:
         dir*=-1
         theoStrip=np.roll(theoStrip, 1, axis=1)
     theoStrip = np.roll(theoStrip, dir*129, axis=0)
-    pixels.update(theoStrip, 0.7, 0.01)
+    pixels.update(theoStrip, 1.0, 0.01)
     if np.sum(pixels.getArrayForDisplay()) > (1024*3*200):
         client.putPixels(0, np.zeros_like(pixels.getArrayForDisplay()))
         break
