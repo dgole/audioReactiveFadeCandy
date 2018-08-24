@@ -7,7 +7,9 @@ import numpy as np
 import functionLib as lib
 import sys
 
-if len(sys.argv) == 1: brightnessFactor = 0.5
+if len(sys.argv) == 1: 
+    brightnessFactor = 0.5
+    colorOption = "all"
 elif len(sys.argv) == 2: 
     brightnessFactor = float(sys.argv[1])
     colorOption = "all"
