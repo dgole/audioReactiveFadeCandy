@@ -6,8 +6,7 @@ import functionLib as lib
 import micStream
 import sys
 
-brightness = float(sys.argv[1])
-displayPowerFactor = (brightness/100)*(122)
+brightnessFactor = float(sys.argv[1])
 
 nStrips = 16
 lStrip  = 64
@@ -40,5 +39,5 @@ while True:
         pixels.update(theo, 0.7, 0.1)
         #print(width)
         #print(displayPower * colorWheel[frameNumEff])
-        client.putPixels(0, pixels.getArrayForDisplay())
+        client.putPixels(0, brightNessFactor*pixels.getArrayForDisplay())
         frameCount+=1
