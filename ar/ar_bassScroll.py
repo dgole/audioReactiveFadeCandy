@@ -28,7 +28,7 @@ while True:
         displayPower = int(122*np.power(power/powerSmooth.value, 1.5))
         theoStrip = np.roll(theoStrip, 1, axis=0)
         theoStrip[0] = displayPower * colorWheel[frameNumEff]
-        pixels.update(theoStrip, 1.0, 1.0)
+        pixels.update(theoStrip, 0.5, 0.5)
         #print(displayPower * colorWheel[frameNumEff])
         client.putPixels(0, pixels.getArrayForDisplay())
         frameCount+=1
