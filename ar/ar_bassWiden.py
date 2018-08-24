@@ -32,7 +32,7 @@ while True:
         pixels.update(theoStrip, 0.7, 0.1)
         print(width)
         print(displayPower * colorWheel[frameNumEff])
-       if np.sum(pixels.getArrayForDisplay()) > (1024*3*200):
+        if np.sum(pixels.getArrayForDisplay()) > (1024*3*200):
             client.putPixels(0, np.zeros_like(pixels.getArrayForDisplay()))
             break
         else:
