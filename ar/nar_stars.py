@@ -6,6 +6,8 @@ import fastopc, time
 import numpy as np
 import functionLib as lib
 
+brightnessFactor = float(sys.argv[1])
+
 nStrips = 16
 lStrip  = 64
 
@@ -38,12 +40,12 @@ while True:
             client.putPixels(0, np.zeros_like(pixels.getArrayForDisplay()))
             break
         else:
-            client.putPixels(0, pixels.getArrayForDisplay())
+            client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
         time.sleep(waitTime)
     # clear old stars
     for i in range(0,int(20/waitTime)):
         pixels.update(zeroStrip, 0.0, 0.02)
-        client.putPixels(0, pixels.getArrayForDisplay())
+        client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
         time.sleep(waitTime)
     # fully zero out strip
     pixels.update(zeroStrip, 1.0, 1.0)
