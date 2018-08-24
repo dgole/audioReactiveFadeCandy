@@ -23,7 +23,7 @@ while True:
     success = stream.readAndCalc()
     if success:
         frameNumEff = np.mod(frameCount, nColorWheel)
-        power = np.sum(stream.freqSpectrum[10//5:300//5])
+        power = np.sum(stream.freqSpectrum[10//5:250//5])
         powerSmooth.update(power)
         displayPower = int(122*power/powerSmooth.value)
         theoStrip = np.roll(theoStrip, 1, axis=0)
