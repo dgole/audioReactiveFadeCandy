@@ -10,7 +10,8 @@ import sys
 nStrips = 16
 lStrip  = 64
 
-brightnessFactor = float(sys.argv[1])
+if len(sys.argv) == 1: brightnessFactor = 0.6
+else: brightnessFactor = float(sys.argv[1])
 
 client = fastopc.FastOPC('localhost:7890')
 
