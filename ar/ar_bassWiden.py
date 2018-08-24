@@ -7,7 +7,7 @@ import micStream
 
 nStrips = 16
 lStrip  = 64
-#client = fastopc.FastOPC('localhost:7890')
+client = fastopc.FastOPC('localhost:7890')
 
 pixels    = lib.Pixels(nStrips, lStrip, 0)
 theoStrip = np.zeros([lStrip, 3])
@@ -25,13 +25,12 @@ while True:
         frameNumEff = np.mod(frameCount, nColorWheel)
         power = np.sum(stream.freqSpectrum[10//5:300//5])
         powerSmooth.update(power)
-        displayPower = int(122*power/powerSmooth.value)
-        
+        displayPower = int(122*power/powerSmooth.value)       
         width = int(5 + np.sqrt(float(displayPower)))
         theoStrip[0:width] =  255 * colorWheel[frameNumEff-nColorWheel//2]
         theoStrip[width:]  = displayPower * colorWheel[frameNumEff]
         pixels.update(theoStrip, 0.9, 0.2)
         print(width)
         print(displayPower * colorWheel[frameNumEff])
-        #client.putPixels(0, pixels.getArrayForDisplay())
+        client.putPixels(0, pixels.getArrayForDisplay())
         frameCount+=1
