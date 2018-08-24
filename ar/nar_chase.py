@@ -31,6 +31,5 @@ while True:
     theoStrip = np.roll(theoStrip, dir, axis=0)
     pixels.update(theoStrip, 1.0, 0.0025)
     client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
-
     n+=dir
-    #time.sleep(0.001)
+    time.sleep(0.0025)
