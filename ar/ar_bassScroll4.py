@@ -16,7 +16,7 @@ stream = micStream.Stream(fps=30, nBuffers=4)
 
 powerSmooth = lib.ExpFilter(val=0.05, alpha_rise=0.05, alpha_decay=0.05)
 nColorWheel = 300
-nOnOneStrip = 64
+nOnOneStrip = 10
 colorWheel = lib.getColorWheel(nColorWheel)
 frameCount = 0
 
@@ -24,7 +24,7 @@ while True:
     success = stream.readAndCalc()
     if success:
         frameNumEff  = np.mod(frameCount, nColorWheel)
-        stripNum     = np.mod(np.floor(frameNumEff/nOnOneStrip),nStrips//2)
+        stripNum     = np.mod(np.floor(frameCount/nOnOneStrip),nStrips//2)
         print(stripNum)
         power = np.sum(stream.freqSpectrum[20//7:250//7])
         powerSmooth.update(power)
