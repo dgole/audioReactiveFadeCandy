@@ -12,7 +12,7 @@ client = fastopc.FastOPC('localhost:7890')
 pixels    = lib.Pixels(nStrips, lStrip, 0)
 theoStrip = np.zeros([lStrip, 3])
 
-stream = micStream.Stream(fps=30, nBuffers=6)
+stream = micStream.Stream(fps=40, nBuffers=4)
 
 powerSmooth = lib.ExpFilter(val=0.05, alpha_rise=0.05, alpha_decay=0.05)
 nColorWheel = 300
