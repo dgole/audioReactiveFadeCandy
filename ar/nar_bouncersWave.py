@@ -9,6 +9,8 @@ import functionLib as lib
 nStrips = 16
 lStrip  = 64
 
+brightnessFactor = float(sys.argv[1])
+
 client = fastopc.FastOPC('localhost:7890')
 
 class Bouncer :
@@ -63,7 +65,7 @@ while True:
         bouncerList[i].update()
     pixels.update(theoStrip, 0.5, 0.5)
     #print((pixels.getArrayForDisplay())[0:64,0])
-    client.putPixels(0, pixels.getArrayForDisplay())
+    client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
     #time.sleep(0.01)
 
 
