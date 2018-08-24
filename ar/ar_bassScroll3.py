@@ -6,9 +6,11 @@ import functionLib as lib
 import micStream
 import sys
 
+if len(sys.argv) == 1: brightnessFactor = 0.7
+else: brightnessFactor = float(sys.argv[1])
+
 nStrips = 16
 lStrip  = 64
-brightnessFactor = float(sys.argv[1])
 
 client = fastopc.FastOPC('localhost:7890')
 
