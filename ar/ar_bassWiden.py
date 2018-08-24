@@ -29,7 +29,7 @@ while True:
         width = int(5 + np.sqrt(float(displayPower)))
         theoStrip[0:width] =  255 * colorWheel[frameNumEff-nColorWheel//2]
         theoStrip[width:]  = displayPower * colorWheel[frameNumEff]
-        pixels.update(theoStrip, 0.9, 0.2)
+        pixels.update(theoStrip, 0.9, 0.1)
         print(width)
         print(displayPower * colorWheel[frameNumEff])
         client.putPixels(0, pixels.getArrayForDisplay())
