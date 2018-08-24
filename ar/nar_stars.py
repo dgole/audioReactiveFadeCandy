@@ -14,7 +14,7 @@ client = fastopc.FastOPC('localhost:7890')
 waitTime = 0.1
 #fade stars in over 10 frames at 0.1 s/frame is 1s per star
 
-nStars = 100
+nStars = 70
 pixels = lib.Pixels(nStrips, lStrip, 0)
 theoStrips = np.zeros([nStars, nStrips*lStrip, 3])
 zeroStrip = np.zeros_like(pixels.getArrayForDisplay())
@@ -28,6 +28,7 @@ while True:
         maxColor  = np.amax(colors[n])
         #colors[n]    = 255*colors[n]/maxColor
         colors[n] = [200,0,0]
+        colors[n] = [150,0,100]
     for n in range(nStars): theoStrips[n, positions[n]] = colors[n] 
     # bring in new stars
     for i in range(0,nStars*10):
