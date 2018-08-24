@@ -6,7 +6,8 @@ import functionLib as lib
 import micStream
 import sys
 
-brightnessFactor = float(sys.argv[1])
+if len(sys.argv) == 1: brightnessFactor = 0.6
+else: brightnessFactor = float(sys.argv[1])
 
 nStrips = 16
 lStrip  = 64
