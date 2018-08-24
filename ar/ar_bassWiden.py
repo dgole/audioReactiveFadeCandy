@@ -30,7 +30,7 @@ while True:
         width = int(5 + np.sqrt(float(displayPower)))
         for i in range(8):
             theoStrip[0:width] =  255 * colorWheel[frameNumEff-100*i]
-            theoStrip[width:]  = displayPower * colorWheel[frameNumEff-1000*i]
+            theoStrip[width:]  = displayPower * colorWheel[frameNumEff-100*(i-4)]
             theo[(2*i+0)*lStrip:(2*i+1)*lStrip] = theoStrip
             theo[(2*i+1)*lStrip:(2*i+2)*lStrip] = theoStrip 
         pixels.update(theoStrip, 0.7, 0.1)
