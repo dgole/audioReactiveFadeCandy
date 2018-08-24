@@ -4,9 +4,13 @@ import fastopc, time
 import numpy as np
 import functionLib as lib
 import micStream
+import sys
 
 nStrips = 16
 lStrip  = 64
+
+brightnessFactor = float(sys.argv[1])
+
 client = fastopc.FastOPC('localhost:7890')
 
 pixels    = lib.Pixels(nStrips, lStrip, 0)
@@ -30,5 +34,5 @@ while True:
         theoStrip[0] = displayPower * colorWheel[frameNumEff]
         pixels.update(theoStrip, 0.5, 0.5)
         #print(displayPower * colorWheel[frameNumEff])
-        client.putPixels(0, pixels.getArrayForDisplay())
+        client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
         frameCount+=1
