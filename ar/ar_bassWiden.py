@@ -11,6 +11,7 @@ client = fastopc.FastOPC('localhost:7890')
 
 pixels    = lib.Pixels(nStrips, lStrip, 0)
 theoStrip = np.zeros([lStrip, 3])
+theo      = np.zeros([nStrips*lStrip, 3])
 
 stream = micStream.Stream(fps=40, nBuffers=4)
 
@@ -27,11 +28,14 @@ while True:
         powerSmooth.update(power)
         displayPower = int(122*power/powerSmooth.value)       
         width = int(5 + np.sqrt(float(displayPower)))
-        theoStrip[0:width] =  255 * colorWheel[frameNumEff-nColorWheel//2]
-        theoStrip[width:]  = displayPower * colorWheel[frameNumEff]
+        for i in range(8):
+            theoStrip[0:width] =  255 * colorWheel[frameNumEff-nColorWheel//8]
+            theoStrip[width:]  = displayPower * colorWheel[frameNumEff-nColorWheel//8-nColorWheel//2]
+            theo[(2*i+0)*lStrip:(2*i+1)*lStrip] = theoStrip
+            theo[(2*i+1)*lStrip:(2*i+2)*lStrip] = theoStrip 
         pixels.update(theoStrip, 0.7, 0.1)
-        print(width)
-        print(displayPower * colorWheel[frameNumEff])
+        #print(width)
+        #print(displayPower * colorWheel[frameNumEff])
         if np.sum(pixels.getArrayForDisplay()) > (1024*3*200):
             client.putPixels(0, np.zeros_like(pixels.getArrayForDisplay()))
             break
