@@ -29,7 +29,7 @@ while True:
         frameNumEff = np.mod(frameCount, nColorWheel)
         power = np.sum(stream.freqSpectrum[20//7:250//7])
         powerSmooth.update(power)
-        displayPower = int(displayPowerFactor*power/powerSmooth.value)       
+        displayPower = int(122*power/powerSmooth.value)       
         width = int(5 + np.sqrt(float(displayPower)))
         for i in range(8):
             theoStrip[width:] = displayPower * colorWheel[np.mod(frameNumEff+10*i+200,nColorWheel)]
