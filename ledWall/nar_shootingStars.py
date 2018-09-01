@@ -2,9 +2,12 @@
 
 # Light each LED in sequence, and repeat.
 
-import fastopc, time
 import numpy as np
+import sys
+sys.path.append("../ar/")
+import fastopc, time
 import functionLib as lib
+import micStream
 
 nStrips = 16
 lStrip  = 64
@@ -44,7 +47,3 @@ while True:
                     client.putPixels(0, pixels.getArrayForDisplay())
                 time.sleep(waitTimeThisStar)
     time.sleep(waitBetweenChances)
-
-            
- 
-

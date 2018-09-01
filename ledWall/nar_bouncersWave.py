@@ -2,10 +2,12 @@
 
 # Light each LED in sequence, and repeat.
 
-import fastopc, time
 import numpy as np
-import functionLib as lib
 import sys
+sys.path.append("../ar/")
+import fastopc, time
+import functionLib as lib
+import micStream
 
 nStrips = 16
 lStrip  = 64
@@ -38,9 +40,9 @@ class Bouncer :
             self.locInt = int(self.locFloat)
             self.outArray = np.roll(self.outArray, int(np.sign(self.speed)), axis=0)
         if self.locInt == self.n or self.locInt == self.nPixels-1-self.n:
-            self.speed = -self.speed            
+            self.speed = -self.speed
     def getFullOutArray(self):
-        returnArray = self.outArray 
+        returnArray = self.outArray
         return returnArray.astype(int)
 
 pixels = lib.Pixels(nStrips, lStrip, 20)
@@ -69,5 +71,3 @@ while True:
     #print((pixels.getArrayForDisplay())[0:64,0])
     client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
     #time.sleep(0.01)
-
-

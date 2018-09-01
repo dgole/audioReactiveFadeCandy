@@ -2,10 +2,12 @@
 
 # Light each LED in sequence, and repeat.
 
-import fastopc, time
 import numpy as np
-import functionLib as lib
 import sys
+sys.path.append("../ar/")
+import fastopc, time
+import functionLib as lib
+import micStream
 
 if len(sys.argv) == 1: brightnessFactor = 0.6
 else: brightnessFactor = float(sys.argv[1])
@@ -38,9 +40,9 @@ class Bouncer :
             self.locInt = int(self.locFloat)
             self.outArray = np.roll(self.outArray, int(np.sign(self.speed)), axis=0)
         if self.locInt == self.n or self.locInt == self.nPixels-1-self.n:
-            self.speed = -self.speed            
+            self.speed = -self.speed
     def getFullOutArray(self):
-        returnArray = self.outArray 
+        returnArray = self.outArray
         return returnArray.astype(int)
 
 nBouncers = 32
@@ -48,7 +50,7 @@ pixels = lib.Pixels(nStrips, lStrip, 20)
 theoStrip = np.zeros([nStrips*lStrip, 3])
 
 bouncerList = []
-for i in range(32): 
+for i in range(32):
     bouncerList.append(Bouncer(np.random.randint(1,high=8), np.random.rand()*0.3+0.05, np.random.rand(3), 64))
 
 
@@ -59,8 +61,6 @@ while True:
         base = stripNum*lStrip
         theoStrip[base:base+lStrip] = bouncerList[i].getFullOutArray() + bouncerList[i+16].getFullOutArray()
     pixels.update(theoStrip, 0.5, 0.5)
-    #print((pixels.getArrayForDisplay())[0:64,0])    
+    #print((pixels.getArrayForDisplay())[0:64,0])
     client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
     #time.sleep(0.01)
-
-

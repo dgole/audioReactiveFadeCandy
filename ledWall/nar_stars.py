@@ -2,22 +2,24 @@
 
 # Light each LED in sequence, and repeat.
 
-import fastopc, time
 import numpy as np
-import functionLib as lib
 import sys
+sys.path.append("../ar/")
+import fastopc, time
+import functionLib as lib
+import micStream
 
-if len(sys.argv) == 1: 
+if len(sys.argv) == 1:
     brightnessFactor = 0.5
     colorOption = "all"
-elif len(sys.argv) == 2: 
+elif len(sys.argv) == 2:
     brightnessFactor = float(sys.argv[1])
     colorOption = "all"
-else: 
+else:
     brightnessFactor = float(sys.argv[1])
     colorOption = str(sys.argv[2])
 
-    
+
 nStrips = 16
 lStrip  = 64
 
@@ -48,7 +50,7 @@ while True:
             colors[n] = [0,255,0]
         elif colorOption=="purple":
             colors[n] = [200,0,150]
-    for n in range(nStars): theoStrips[n, positions[n]] = colors[n] 
+    for n in range(nStars): theoStrips[n, positions[n]] = colors[n]
     # bring in new stars
     for i in range(0,nStars*10):
         starNum = np.floor(i/10)
