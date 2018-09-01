@@ -40,7 +40,7 @@ while True:
     colors    = np.random.randint(0, 255, size=[nStars,3])
     for n in range(nStars):
         maxColor  = np.amax(colors[n])
-        if colorOption == "all":
+        if colorOption == "all`":`
             colors[n]    = 255*colors[n]/maxColor
         elif colorOption=="red":
             colors[n] = [255,0,0]
