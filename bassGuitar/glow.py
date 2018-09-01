@@ -9,13 +9,13 @@
 # 4. along strap (40ish)
 # 4 fadecandy channels
 # that's about 120 leds total
-# 120 * 20 mA per color led = 2.4 A, exactly max for battery.  
+# 120 * 20 mA per color led = 2.4 A, exactly max for battery.
 # dial fadecandy whitepoint to 0.8 or so and we're good to max out 1 color.
-# 
+#
 # MODE IDEAS
-# body brightness all same, scales with volume.  number of lights lit on neck scales with volume. 
+# body brightness all same, scales with volume.  number of lights lit on neck scales with volume.
 #
-#
+#test change test change
 #
 #
 #
