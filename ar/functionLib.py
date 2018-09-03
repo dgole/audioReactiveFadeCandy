@@ -34,9 +34,37 @@ class Pixels():
         returnArray = self.array
         if self.minDisplay != 0: returnArray[returnArray < self.minDisplay] = 0
         return returnArray
-    
-    
-    
+
+class BassPixels():
+    'neck then body then strap'
+    def __init__(self, lNeck,lBody, lStrap, minDisplay):
+        self.lNeck  = lNeck
+        self.lBody  = lBody
+        self.lStrap = lStrap
+        self.nLed = lNeck*2 + lBody + lStrap
+        self.minDisplay = minDisplay
+        self.array      = np.zeros([self.nLed, 3])
+    def updateNeck(self, arrayNew, alphaRise, alphaDecay):
+        alpha = arrayNew - self.array[0:self.lNeck]
+        alpha[alpha > 0.0 ] = alphaRise
+        alpha[alpha <= 0.0] = alphaDecay
+        self.array[0:self.lNeck] = alpha*arrayNew + (1.0-alpha)*self.array[0:self.lNeck]
+        self.array[self.lNeck:2*self.lNeck] = alpha*arrayNew + (1.0-alpha)*self.array[self.lNeck:2*self.lNeck]
+    def updateBody(self, arrayNew, alphaRise, alphaDecay):
+        alpha = arrayNew - self.array[self.lNeck*2:self.lNeck*2+self.lBody]
+        alpha[alpha > 0.0 ] = alphaRise
+        alpha[alpha <= 0.0] = alphaDecay
+        self.array[self.lNeck*2:self.lNeck*2+self.lBody] = alpha*arrayNew + (1.0-alpha)*self.array[self.lNeck*2:self.lNeck*2+self.lBody]
+    def updateStrap(self, arrayNew, alphaRise, alphaDecay):
+        alpha = arrayNew - self.array[self.lNeck*2+self.lBody:]
+        alpha[alpha > 0.0 ] = alphaRise
+        alpha[alpha <= 0.0] = alphaDecay
+        self.array[self.lNeck*2+self.lBody:] = alpha*arrayNew + (1.0-alpha)*self.array[self.lNeck*2+self.lBody:]
+    def getArrayForDisplay(self):
+        returnArray = self.array
+        if self.minDisplay != 0: returnArray[returnArray < self.minDisplay] = 0
+        return returnArray
+
 class ExpFilter:
     """Temporal exponential smoothing filter
     """
@@ -53,8 +81,8 @@ class ExpFilter:
         else:
             alpha = self.alpha_rise if value > self.value else self.alpha_decay
         self.value = alpha * value + (1.0 - alpha) * self.value
-    
-    
+
+
 def getColorWheel(nTot):
     colorWheel = np.zeros([nTot,3])
     nTot3 = nTot//3
