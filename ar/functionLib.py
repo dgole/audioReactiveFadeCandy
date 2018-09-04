@@ -50,6 +50,16 @@ class BassPixels():
         alpha[alpha <= 0.0] = alphaDecay
         self.array[0:self.lNeck] = alpha*arrayNew + (1.0-alpha)*self.array[0:self.lNeck]
         self.array[self.lNeck:2*self.lNeck] = alpha*arrayNew + (1.0-alpha)*self.array[self.lNeck:2*self.lNeck]
+    def updateNeck1(self, arrayNew, alphaRise, alphaDecay):
+        alpha = arrayNew - self.array[0:self.lNeck]
+        alpha[alpha > 0.0 ] = alphaRise
+        alpha[alpha <= 0.0] = alphaDecay
+        self.array[0:self.lNeck] = alpha*arrayNew + (1.0-alpha)*self.array[0:self.lNeck]
+    def updateNeck2(self, arrayNew, alphaRise, alphaDecay):
+        alpha = arrayNew - self.array[self.lNeck:2*self.lNeck]
+        alpha[alpha > 0.0 ] = alphaRise
+        alpha[alpha <= 0.0] = alphaDecay
+        self.array[self.lNeck:2*self.lNeck] = alpha*arrayNew + (1.0-alpha)*self.array[self.lNeck:2*self.lNeck]
     def updateBody(self, arrayNew, alphaRise, alphaDecay):
         alpha = arrayNew - self.array[self.lNeck*2:self.lNeck*2+self.lBody]
         alpha[alpha > 0.0 ] = alphaRise

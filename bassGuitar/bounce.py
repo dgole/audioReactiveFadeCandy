@@ -29,7 +29,6 @@ lBody  = 40
 lStrap = 36
 
 pixels    = lib.BassPixels(lNeck, lBody, lStrap, 0)
-theoAll   =
 theoNeck1 = np.zeros([lNeck,  3])
 theoNeck2 = np.zeros([lNeck,  3])
 theoBody  = np.zeros([lBody,  3])
@@ -42,10 +41,11 @@ frameCount = 0
 while True:
     success = stream.readAndCalc()
     if success:
-        frameNumEff = np.mod(frameCount, nColorWheel)
-        power = np.sum(stream.freqSpectrum[20//7:250//7])
-        powerSmooth.update(power)
-        theoNeck     = np.roll(theoNeck, 1, axis=0)
+        frameNumEff   = np.mod(frameCount, nColorWheel)
+        theoNeck1     = np.roll(theoNeck1, 1, axis=0)
+        theoNeck2     = np.roll(theoNeck2, 1, axis=0)
+        theoBody      = np.roll(theoBody,  1, axis=0)
+        theoStrap     = np.roll(theoStrap, 1, axis=0)
         theoNeck[0]  = displayPower * colorWheel[frameNumEff]
         theoBody     = displayPower * colorWheel[np.mod(frameNumEff+200, nColorWheel)]
         pixels.updateBody(theoBody, 0.5, 0.5)
@@ -53,3 +53,18 @@ while True:
         print(displayPower * colorWheel[frameNumEff])
         #client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
         frameCount+=1
+
+bouncerList = []
+for i in range(4):
+    bouncerList.append(Bouncer(np.random.randint(1,high=4), np.random.rand()*0.1+0.05, np.random.rand(3), 64))
+
+while True:
+    for i in range(0,nBouncers): bouncerList[i].update()
+    for i in range(0,16):
+        stripNum = i
+        base = stripNum*lStrip
+        theoStrip[base:base+lStrip] = bouncerList[i].getFullOutArray() + bouncerList[i+16].getFullOutArray()
+    pixels.update(theoStrip, 0.5, 0.5)
+    #print((pixels.getArrayForDisplay())[0:64,0])
+    client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
+    #time.sleep(0.01)
