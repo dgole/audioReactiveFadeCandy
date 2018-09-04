@@ -34,7 +34,7 @@ class Pixels():
         returnArray = self.array
         if self.minDisplay != 0: returnArray[returnArray < self.minDisplay] = 0
         return returnArray
-
+#
 class BassPixels():
     'neck then body then strap'
     def __init__(self, lNeck,lBody, lStrap, minDisplay):
@@ -81,7 +81,6 @@ class ExpFilter:
         else:
             alpha = self.alpha_rise if value > self.value else self.alpha_decay
         self.value = alpha * value + (1.0 - alpha) * self.value
-
 
 def getColorWheel(nTot):
     colorWheel = np.zeros([nTot,3])
