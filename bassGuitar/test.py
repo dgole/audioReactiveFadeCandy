@@ -26,13 +26,9 @@ else: brightnessFactor = float(sys.argv[1])
 
 client = fastopc.FastOPC('localhost:7890')
 
-#lNeck  = 18
-#lBody  = 40
-#lStrap = 36
-lNeck  = 10
-lBody  = 20
-lStrap = 24
-
+lNeck  = 18
+lBody  = 40
+lStrap = 36
 
 pixels    = lib.BassPixels(lNeck, lBody, lStrap, 0)
 theoNeck  = np.zeros([lNeck,  3])
@@ -58,6 +54,6 @@ while breakVar==0:
         pixels.updateBody(theoBody, 0.7, 0.1)
         pixels.updateNeck(theoNeck, 0.7, 0.1)
         #print(displayPower * colorWheel[frameNumEff])
-        print(pixels.getArrayForDisplay().shape)
         client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
         frameCount+=1
+        time.sleep(0.1)
