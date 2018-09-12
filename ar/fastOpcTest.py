@@ -4,19 +4,19 @@
 
 import fastopc, time
 import numpy as np
+import functionLib as lib
 
-numLEDs = 512
 client = fastopc.FastOPC('localhost:7890')
 
-n = 1
-dir = 1
-pixels = Pixels(numLEDs, 0)
-theo = np.zeros_like(pixels.array)
-color=2
+n         = 1
+dir       = 1
+pixels    = lib.Pixels(1, 64, 0)
+arrayTheo = np.zeros_like(pixels.array)
+color     = 2
 arrayTheo[n,color] = 255
 
 while True:
-	if n == (numLEDs-1):
+	if n == (64-1):
 		dir*=-1
 	elif n == 0:
 		dir*=-1

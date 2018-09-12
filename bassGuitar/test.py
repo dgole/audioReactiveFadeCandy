@@ -26,16 +26,18 @@ else: brightnessFactor = float(sys.argv[1])
 
 client = fastopc.FastOPC('localhost:7890')
 
-lNeck  = 18
-lBody  = 40
-lStrap = 36
+#lNeck  = 18
+#lBody  = 40
+#lStrap = 36
+lNeck  = 10
+lBody  = 20
+lStrap = 24
+
 
 pixels    = lib.BassPixels(lNeck, lBody, lStrap, 0)
 theoNeck  = np.zeros([lNeck,  3])
 theoBody  = np.zeros([lBody,  3])
 theoStrap = np.zeros([lStrap, 3])
-
-stream = micStream.Stream(fps=30, nBuffers=4)
 
 powerSmooth = lib.ExpFilter(val=0.05, alpha_rise=0.05, alpha_decay=0.05)
 nColorWheel = 600
@@ -44,10 +46,10 @@ frameCount = 0
 
 breakVar=0
 while breakVar==0:
-    success = stream.readAndCalc()
+    success = True
     if success:
         frameNumEff = np.mod(frameCount, nColorWheel)
-        power = np.sum(stream.freqSpectrum[20//7:250//7])
+        power = 0.5
         powerSmooth.update(power)
         displayPower = int(122*power/powerSmooth.value)
         width = int(5 + np.sqrt(float(displayPower)))
@@ -55,7 +57,7 @@ while breakVar==0:
         theoNeck[0:width] = 255          * colorWheel[np.mod(frameNumEff,     nColorWheel)]
         pixels.updateBody(theoBody, 0.7, 0.1)
         pixels.updateNeck(theoNeck, 0.7, 0.1)
-        print(width)
-        print(displayPower * colorWheel[frameNumEff])
-        #client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
+        #print(displayPower * colorWheel[frameNumEff])
+        print(pixels.getArrayForDisplay().shape)
+        client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
         frameCount+=1
