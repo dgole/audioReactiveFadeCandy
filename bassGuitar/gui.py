@@ -14,6 +14,8 @@ def placePatternButtons(brightnessFactor):
         current brightnessFactor '''
     tk.Button(window1, text='basic', command=lambda a=brightnessFactor: patterns.basic(a)).grid(row=8+0, column=1, sticky='W')
     tk.Button(window1, text='scroll', command=lambda a=brightnessFactor: patterns.scroll(a)).grid(row=8+1, column=1, sticky='W')
+    tk.Button(window1, text='beatDetectionBounce', command=lambda a=brightnessFactor: patterns.beatDetectionBounce(a)).grid(row=8+2, column=1, sticky='W')
+    tk.Button(window1, text='oneNote', command=lambda a=brightnessFactor: patterns.oneNote(a)).grid(row=8+3, column=1, sticky='W')
 
 def changeBrightness(i):
     ''' function that gets called when a brigntess button gets pressed

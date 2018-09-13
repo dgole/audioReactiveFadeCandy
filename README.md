@@ -8,5 +8,5 @@
 # each project or configuration of lights gets its own directory.
 # each directory should have
 # 1 the .json file to configure the server
-# 2 some sort of patterns.py file that contains the patterns as fucntions
-# 3 some gui that implements the the patterns
+# 2 some sort of patterns.py file that contains the patterns as functions
+# 3 some gui or script that implements the patterns

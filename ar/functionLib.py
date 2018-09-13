@@ -109,3 +109,17 @@ def getColorWheel(nTot):
             colorWheel[n,1] = 0.0
             colorWheel[n,2] = 1.0 - float(n-2*nTot3)/float(nTot3)
     return colorWheel
+
+
+def clDisplay(powerNorm1):
+    maxDisplay     = 100.0
+    maxOutFactor   = 5
+    segLen         = int(maxDisplay / maxOutFactor)
+    powerNorm      = powerNorm1 * maxDisplay/maxOutFactor
+    string1        = 'O' * int(min(powerNorm, maxDisplay))
+    string2        = '-' * int(max(maxDisplay-powerNorm,0))
+    finalString    = string1 + string2
+    charList = list(finalString+'|')
+    for i in range(maxOutFactor): charList[i*segLen]='|'
+    finalString = ''.join(charList)
+    print(finalString)
