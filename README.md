@@ -1,7 +1,8 @@
 # audioReactiveFadeCandy
 # This repo started by cloning https://github.com/scanlime/fadecandy
 # all underlying code (opc, fastopc, etc) is not mine
-# my additions are the ar, ledWall, bassGuitar, and musicTheory directories  
+# my additions are the ar, ledWall, bassGuitar, and musicTheory, and basement directories
+
 # How this should be organized:
 # ar (audio-reactive) directory contains tools and libraries to be used in the implementation of patterns
 
