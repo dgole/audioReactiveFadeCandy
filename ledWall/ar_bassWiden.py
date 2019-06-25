@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 
-import fastopc, time
 import numpy as np
+import sys
+sys.path.append("../ar/")
+import fastopc, time
 import functionLib as lib
 import micStream
-import sys
 
 if len(sys.argv) == 1: brightnessFactor = 0.6
 else: brightnessFactor = float(sys.argv[1])
@@ -30,13 +31,13 @@ while True:
         frameNumEff = np.mod(frameCount, nColorWheel)
         power = np.sum(stream.freqSpectrum[20//7:250//7])
         powerSmooth.update(power)
-        displayPower = int(122*power/powerSmooth.value)       
+        displayPower = int(122*power/powerSmooth.value)
         width = int(5 + np.sqrt(float(displayPower)))
         for i in range(8):
             theoStrip[width:] = displayPower * colorWheel[np.mod(frameNumEff+10*i+200,nColorWheel)]
             theoStrip[0:width] =  255 * colorWheel[np.mod(frameNumEff+10*i,nColorWheel)]
             theo[(2*i+0)*lStrip:(2*i+1)*lStrip] = theoStrip
-            theo[(2*i+1)*lStrip:(2*i+2)*lStrip] = theoStrip 
+            theo[(2*i+1)*lStrip:(2*i+2)*lStrip] = theoStrip
         pixels.update(theo, 0.7, 0.1)
         #print(width)
         #print(displayPower * colorWheel[frameNumEff])

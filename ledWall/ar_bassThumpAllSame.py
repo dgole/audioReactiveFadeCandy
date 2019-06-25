@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 
-import fastopc, time
 import numpy as np
+import sys
+sys.path.append("../ar/")
+import fastopc, time
 import functionLib as lib
 import micStream
-
 nStrips = 16
 lStrip  = 64
 client = fastopc.FastOPC('localhost:7890')

@@ -2,10 +2,12 @@
 
 # Light each LED in sequence, and repeat.
 
-import fastopc, time
 import numpy as np
-import functionLib as lib
 import sys
+sys.path.append("../ar/")
+import fastopc, time
+import functionLib as lib
+import micStream
 
 if len(sys.argv) == 1: brightnessFactor = 1.0
 else: brightnessFactor = float(sys.argv[1])

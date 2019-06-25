@@ -1,21 +1,22 @@
 #!/usr/bin/env python
 
-import fastopc, time
 import numpy as np
+import sys
+sys.path.append("../ar/")
+import fastopc, time
 import functionLib as lib
 import micStream
-import sys
 
 nStrips = 16
 lStrip  = 64
 
-if len(sys.argv) == 1: brightnessFactor = 0.7
+if len(sys.argv) == 1: brightnessFactor = 0.6
 else: brightnessFactor = float(sys.argv[1])
 
 client = fastopc.FastOPC('localhost:7890')
 
 pixels    = lib.Pixels(nStrips, lStrip, 0)
-theoStrip = np.zeros([lStrip, 3])
+theo      = np.zeros([nStrips*lStrip, 3])
 
 stream = micStream.Stream(fps=30, nBuffers=4)
 
@@ -30,10 +31,10 @@ while True:
         frameNumEff = np.mod(frameCount, nColorWheel)
         power = np.sum(stream.freqSpectrum[20//7:250//7])
         powerSmooth.update(power)
-        displayPower = int(122*np.power(power/powerSmooth.value, 1.5))
-        theoStrip = np.roll(theoStrip, 1, axis=0)
-        theoStrip[0] = displayPower * colorWheel[frameNumEff]
-        pixels.update(theoStrip, 0.5, 0.5)
+        displayPower = int(122*np.power(power/powerSmooth.value,1.5))
+        theo = np.roll(theo, 128, axis=0)
+        theo[0:128] = displayPower * colorWheel[frameNumEff]
+        pixels.update(theo, 0.7, 0.2)
         #print(displayPower * colorWheel[frameNumEff])
         client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
         frameCount+=1
