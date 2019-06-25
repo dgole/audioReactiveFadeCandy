@@ -8,7 +8,7 @@ import micStream
 import music
 import mido
 
-nStrips = 8
+nStrips = 1
 lStrip  = 64
 
 '''
@@ -76,12 +76,12 @@ def stars(brightnessFactor):
     # setup
     waitTime = 0.1
     #fade stars in over 10 frames at 0.1 s/frame is 1s per star
-    nStars = 512
+    nStars = 50
     pixels = lib.Pixels(nStrips, lStrip, 0)
     theoStrips = np.zeros([nStars, nStrips*lStrip, 3])
     zeroStrip = np.zeros_like(pixels.getArrayForDisplay())
     client.putPixels(0, zeroStrip)
-    colorOption="purple"
+    colorOption="all"
     # loop
     while True:
         # select new values
@@ -140,7 +140,8 @@ def bassWiden(brightnessFactor):
             width = int(2 + 0.5*np.sqrt(float(displayPower)))
             theoStrip[width:] = displayPower * colorWheel[np.mod(frameNumEff+200,nColorWheel)]
             theoStrip[0:width] =  255 * colorWheel[np.mod(frameNumEff,nColorWheel)]
-            pixels.update(theoStrip, 0.7, 0.2)
+            #pixels.update(theoStrip, 0.7, 0.2)
+            pixels.update(theoStrip, 1.0, 1.0)
             client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
             frameCount+=1
 
@@ -171,6 +172,40 @@ def bassScrollMiddle(brightnessFactor):
             client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
             frameCount+=1
 
+def kickDrum(brightnessFactor):
+    # always here
+    global nStrips, lStrip
+    client    = fastopc.FastOPC('localhost:7890')
+    # setup
+    pixels = lib.Pixels(nStrips, lStrip, 0)
+    theoStrip = np.zeros([lStrip//2, 3])
+    stream = micStream.Stream(fps=60, nBuffers=4)
+    powerSmooth = lib.ExpFilter(val=0.05, alpha_rise=0.1, alpha_decay=0.1)
+    nColorWheel = 300
+    colorWheel = lib.getColorWheel(nColorWheel)
+    frameCount = 0
+    # loop
+    while True:
+        success = stream.readAndCalc()
+        if success:
+            frameNumEff = np.mod(frameCount, nColorWheel)
+            #power = np.sum(stream.freqSpectrum[20//7:250//7])
+            power = np.sum(stream.freqSpectrum[:20])
+            powerSmooth.update(power)
+            if power > 1.e4:
+                displayPower = int(122*np.power(power/powerSmooth.value, 1.5))
+                theoStrip[:] = displayPower * colorWheel[frameNumEff]
+                #theoStrip[0] = 1000*colorWheel[frameNumEff]
+                pixels.update(theoStrip, 1.0, 0.4)
+                client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
+                frameCount+=1
+            else:
+                theoStrip[:] = np.zeros_like(theoStrip[:])
+                #theoStrip[0] = 1000*colorWheel[frameNumEff]
+                pixels.update(theoStrip, 1.0, 0.4)
+                client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
+
+
 def bassScrollTop(brightnessFactor):
     # always here
     global nStrips, lStrip
@@ -196,7 +231,7 @@ def bassScrollTop(brightnessFactor):
             theoStrip = np.roll(theoStrip, -1, axis=0)
             theoStrip[-2] = displayPower * colorWheel[frameNumEff]
             theoStrip[-1] = 1000*colorWheel[frameNumEff]
-            pixels.update(theoStrip, 0.7, 0.3)
+            pixels.update(theoStrip, 0.7, 0.5)
             client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
             frameCount+=1
 
@@ -325,7 +360,7 @@ def rain1(brightnessFactor):
     global nStrips, lStrip
     client = fastopc.FastOPC('localhost:7890')
     # setup
-    nColorWheel = 200
+    nColorWheel = 100
     colorWheel = lib.getColorWheel(nColorWheel)
     pixels  = lib.Pixels(nStrips, lStrip, 0)
     theoAll = np.zeros([lStrip*nStrips,3])
@@ -335,7 +370,7 @@ def rain1(brightnessFactor):
         for i in range(nStrips): theoAll[i*lStrip,:]=0
         frameNumEff = np.mod(frameCount, nColorWheel)
         theoAll = 0.99*np.roll(theoAll, -1, axis=0)
-        if np.random.rand()<0.5:
+        if np.random.rand()<0.75:
             stripNum = np.random.randint(0, high=nStrips)
             theoAll[(stripNum*lStrip)+lStrip-1]=255*colorWheel[frameNumEff]
         pixels.update(theoAll, 1.0, 0.4)
@@ -356,7 +391,7 @@ def rain2(brightnessFactor):
     stripNum    = 0
     dir         = 1
     updateEvery = 50
-    sleepTime   = 0.035 / updateEvery
+    sleepTime   = 0.03 / updateEvery
     chance      = 0.5
     alpha       = float(2.0/updateEvery)
     # loop
@@ -371,7 +406,7 @@ def rain2(brightnessFactor):
                     dir=-1
                 theoAll[(stripNum*lStrip)+lStrip-1]=255*colorWheel[stripNum]
                 stripNum += dir
-        pixels.update(theoAll, alpha, alpha/7.5)
+        pixels.update(theoAll, alpha, alpha/10.0)
         client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
         frameCount+=1
         time.sleep(sleepTime)
@@ -388,13 +423,18 @@ def rain1_midi(brightnessFactor):
     board      = lib.Board()
     speedCut   = 100
     frameNum   = 0
-    #midiNotes  = [48,50,52,53,55,57,59,60]
-    midiNotes  = [32,33,34,35,36,37,38,39]
+    midiNotes  = []
+    while len(midiNotes) < nStrips:
+        for msg in inport.iter_pending():
+            if msg.type == 'note_on':
+                midiNotes.append(msg.note)
+                print(midiNotes)
     # loop
     while True:
         for msg in inport.iter_pending():
             board.update(msg)
-        color = 2*board.knobs[1:4]
+        color = 2*board.knobs[48:51]
+        overallFactor = float(board.knobs[51]+1)/(128.0)
         if np.mod(frameNum, speedCut) == 0:
             for n in range(nStrips): theoAll[n*lStrip,:]=0
             theoAll     = np.roll(theoAll, -1, axis=0)
@@ -404,7 +444,7 @@ def rain1_midi(brightnessFactor):
                     theoAll[(n*lStrip)+lStrip-1] = color*(board.velocities[midiNoteNum]/128.0)
                     #theoAll[(n*lStrip)+lStrip-1] = stripColors[n]
             pixels.update(theoAll, 1.0, 0.4)
-            client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
+            client.putPixels(0, overallFactor*brightnessFactor*pixels.getArrayForDisplay())
         time.sleep(2.e-4)
         frameNum+=1
 
@@ -420,28 +460,172 @@ def rain2_midi(brightnessFactor):
     board      = lib.Board()
     speedCut   = 100
     frameNum   = 0
-    midiNotes  = [48,50,52,53,55,57,59,60]
-    #midiNotes  = [32,33,34,35,36,37,38,39]
     stripColors = np.zeros([nStrips, 3])
+    n=0
+    while n < nStrips:
+        for msg in inport.iter_pending():
+            board.update(msg)
+            if msg.type == 'note_on':
+                stripColors[n] = 2*board.knobs[48:51]
+        n+=1
     # loop
     while True:
         for msg in inport.iter_pending():
             board.update(msg)
-        for n in range(nStrips):
-            if board.notes[n+32] == 1:
-                stripColors[n] = 2*board.knobs[1:4]
+        overallFactor = float(board.knobs[51]+1)/(128.0)
         if np.mod(frameNum, speedCut) == 0:
             for n in range(nStrips): theoAll[n*lStrip,:]=0
             theoAll     = np.roll(theoAll, -1, axis=0)
             for n in range(nStrips):
-                midiNoteNum = midiNotes[n]
+                iNotes[n]
                 if board.notes[midiNoteNum] == 1:
-                    #theoAll[(n*lStrip)+lStrip-1] = color*(board.velocities[midiNoteNum]/128.0)
                     theoAll[(n*lStrip)+lStrip-1] = stripColors[n]
             pixels.update(theoAll, 1.0, 0.4)
-            client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
+            client.putPixels(0, overallFactor*brightnessFactor*pixels.getArrayForDisplay())
         time.sleep(2.e-4)
         frameNum+=1
+
+def drums_midi(brightnessFactor):
+    # always here
+    global nStrips, lStrip
+    client = fastopc.FastOPC('localhost:7890')
+    # setup
+    pixels     = lib.Pixels(nStrips, lStrip, 0)
+    theoAll    = np.zeros([lStrip*nStrips,3])
+    inputNames = mido.get_input_names()
+    inport     = mido.open_input(inputNames[1])
+    board      = lib.Board()
+    speedCut   = 100
+    frameNum   = 0
+    nColorWheel = nStrips
+    colorWheel  = lib.getColorWheel(nColorWheel)
+    stripColors = np.zeros([nStrips, 3])
+    n=0
+    while n < nStrips:
+        stripColors[n]=colorWheel[n]*255
+    	n+=1
+    midiNotes=[]
+    while len(midiNotes) < nStrips:
+        for msg in inport.iter_pending():
+            if msg.type == 'note_on':
+                midiNotes.append(msg.note)
+                print(midiNotes)
+	justTurnedOn = np.zeros(nStrips)
+    # loop
+    while True:
+        for msg in inport.iter_pending():
+            board.update(msg)
+        #overallFactor = float(board.knobs[51]+1)/(128.0)
+        #if np.mod(frameNum, speedCut) == 0:
+        for n in range(nStrips): theoAll[n*lStrip,:]=0
+        theoAll = np.roll(theoAll, -1, axis=0)
+        for n in range(nStrips):
+            if board.notes[midiNotes[n]] == 1:
+                theoAll[(n*lStrip)+lStrip-1] = stripColors[n]
+        pixels.update(theoAll, 1.0, 0.4)
+        client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
+        time.sleep(2.e-2)
+        frameNum+=1
+
+
+def bpm(brightnessFactor):
+    # always here
+    global nStrips, lStrip
+    #client    = fastopc.FastOPC('localhost:7890')
+    # setup
+    #pixels = lib.Pixels(nStrips, lStrip, 20)
+    #theoStrip = np.zeros([lStrip//2, 3])
+    stream = micStream.Stream(fps=30, nBuffers=4)
+    powerMinFreqIndex1 = int(0   / stream.dFreq)
+    powerMaxFreqIndex1 = int(200 / stream.dFreq)
+    powerSmooth = lib.ExpFilter(val=1.0, alpha_rise=0.01, alpha_decay=0.01)
+    #frameCount = 0
+    bpm = music.BPM()
+    # loop
+    while True:
+        success = stream.readAndCalc()
+        if success:
+            power = np.sum(stream.freqSpectrum[powerMinFreqIndex1:powerMaxFreqIndex1])
+            powerSmooth.update(power)
+            bpm.update(power)
+
+
+            #displayPower = max(int(122*power/powerSmooth.value),50)
+            #pixels.update(theoStrip, 0.7, 0.2)
+            #client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
+            #frameCount+=1
+
+
+def joystick(brightnessFactor):
+    # always here
+    global nStrips, lStrip
+    client = fastopc.FastOPC('localhost:7890')
+    # setup
+    pixels     = lib.Pixels(nStrips, lStrip, 0)
+    theoAll    = np.zeros([lStrip*nStrips,3])
+    inputNames = mido.get_input_names()
+    inport     = mido.open_input(inputNames[0])
+    board      = lib.Board()
+    # loop
+    while True:
+        for msg in inport.iter_pending():
+            board.update(msg)
+        for n in range(nStrips): theoAll[n*lStrip,:]=0
+        theoAll      = np.roll(theoAll, -1, axis=0)
+        currentStrip = np.floor((board.pitchwheel+8192)//(8192*2//nStrips))
+        for n in range(nStrips):
+            if n == currentStrip:
+                theoAll[(n*lStrip)+lStrip-1] = [200, 100, 250]
+        pixels.update(theoAll, 1.0, 0.4)
+        client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
+        time.sleep(2.e-2)
+
+
+def loopTest(brightnessFactor):
+    # always here
+    global nStrips, lStrip
+    #client = fastopc.FastOPC('localhost:7890')
+    # setup
+    pixels     = lib.Pixels(nStrips, lStrip, 0)
+    theoAll    = np.zeros([lStrip*nStrips,3])
+    inputNames = mido.get_input_names()
+    inport     = mido.open_input(inputNames[0])
+    board      = lib.Board()
+    mseqList   = []
+    n1         = 0
+    # loop
+    while True:
+        n=0
+        mseqList.append(lib.midiSequence())
+        while n < 10000:
+            n+=1
+            for msg in inport.iter_pending():
+                mseq.update(msg)
+            pixels.update(theoAll, 1.0, 0.4)
+            #client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
+            time.sleep(2.e-4)
+        n1+=1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

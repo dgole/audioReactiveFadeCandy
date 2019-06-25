@@ -7,7 +7,7 @@ import micStream
 import basementPatterns as patterns
 import Tkinter as tk
 
-brightnessFactor = 0.7 # default brightness factor
+brightnessFactor = 0.9 # default brightness factor
 
 def placePatternButtons(brightnessFactor):
     ''' define function that places the pattern buttons with the
@@ -25,6 +25,11 @@ def placePatternButtons(brightnessFactor):
     tk.Button(window1, text='rain2', command=lambda a=brightnessFactor: patterns.rain2(a)).grid(row=8+10, column=1, sticky='W')
     tk.Button(window1, text='rain1_midi', command=lambda a=brightnessFactor: patterns.rain1_midi(a)).grid(row=8+11, column=1, sticky='W')
     tk.Button(window1, text='rain2_midi', command=lambda a=brightnessFactor: patterns.rain2_midi(a)).grid(row=8+12, column=1, sticky='W')
+    tk.Button(window1, text='bpm', command=lambda a=brightnessFactor: patterns.bpm(a)).grid(row=8+13, column=1, sticky='W')
+    tk.Button(window1, text='joystick', command=lambda a=brightnessFactor: patterns.joystick(a)).grid(row=8+14, column=1, sticky='W')
+    tk.Button(window1, text='loopTest', command=lambda a=brightnessFactor: patterns.loopTest(a)).grid(row=8+15, column=1, sticky='W')
+    tk.Button(window1, text='drums_midi', command=lambda a=brightnessFactor: patterns.drums_midi(a)).grid(row=8+16, column=1, sticky='W')
+    tk.Button(window1, text='kick_drum', command=lambda a=brightnessFactor: patterns.kickDrum(a)).grid(row=8+17, column=1, sticky='W')
 
 
 def changeBrightness(i):

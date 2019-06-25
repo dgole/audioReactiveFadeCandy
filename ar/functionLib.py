@@ -5,10 +5,11 @@
 #import fastopc, time
 import numpy as np
 import mido
+import time
 
 class Board:
     def __init__(self):
-        self.knobs      = np.zeros(8)
+        self.knobs      = np.zeros(128)
         self.pitchwheel = 0.0
         self.notes      = np.zeros(128)
         self.velocities = np.zeros(128)
@@ -23,6 +24,22 @@ class Board:
             self.pitchwheel = msg.pitch
         elif msg.type == 'control_change':
             self.knobs[msg.control] = msg.value
+
+class midiSequence:
+    def __init__(self):
+        self.msgList = []
+        self.tList   = []
+    def update(self, msg):
+        if self.tList == 0: self.t0 = time.time
+        self.tList.append(time.time()-self.t0)
+        self.msgList.append(msg)
+    def getMsgs(self, msg):
+        msgReturnList = []
+        t = time.time()
+        for n in range(len(self.tList)):
+            if t<tList[n]:
+                msgReturnList.append(msgList[n])
+
 
 
 class Pixels():

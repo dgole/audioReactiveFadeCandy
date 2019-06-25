@@ -6,7 +6,7 @@ import time
 ####################################################
 inputNames = mido.get_input_names()
 print(inputNames)
-inport     = mido.open_input(inputNames[0])
+inport     = mido.open_input(inputNames[1])
 sleepTime  = 1.e-4
 ####################################################
 

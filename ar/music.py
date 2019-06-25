@@ -40,6 +40,14 @@ class Key:
         print(np.fliplr([sortedNames])[0][0:7])
         print(np.round(np.fliplr([sortedValues])[0],0)[0:7])
 
+'''
+class BPM:
+    def __init__(self, noteList, alpha=0.001):
+
+    def update(self, newNoteSpectrum):
+        self.newNoteSums = np.dot(self.matrix, newNoteSpectrum)
+        self.noteSums.update(self.newNoteSums)
+'''
 
 class NoteSums:
     def __init__(self, noteList, alpha=0.001):
