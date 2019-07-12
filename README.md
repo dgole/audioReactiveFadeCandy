@@ -25,4 +25,5 @@ See the "basement" directory for a typical implementation.
 
 # Demo
 This project has gone through many iterations over the years, but this was probably the most ambitious setup.  This is a 7 foot tall, 21 foot long wall with light strips attached at angles.  It has 16 strips of 64 lights each for a total of 1024 LEDs.  This pattern shown here is pretty simple (all stips doing the same thing), but sometimes the simpler patterns look the cleanest and best.  
+
 <img src="./wall_demo.gif" width="400" height="300" />
