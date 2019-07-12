@@ -1,6 +1,8 @@
 # audioReactiveFadeCandy
+This repo uses a python-based code to control LED light strips.  The code "listens to" audio via a microphone or aux cable and then algorithmically generates patterns with the LEDs, reacting to the audio in real-time with a frame rate of 30-60 fps.    
+
 This repo started by cloning https://github.com/scanlime/fadecandy.  
-All underlying code (opc, fastopc, etc) is not mine.  
+All underlying code that is used to send messages to the lights from the fadecandy controller (opc, fastopc, etc) is not mine.  
 My additions are the ar, ledWall, bassGuitar, and musicTheory, and basement directories.  
 
 # How this should be organized:
