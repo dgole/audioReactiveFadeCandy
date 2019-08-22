@@ -172,38 +172,43 @@ def bassScrollMiddle(brightnessFactor):
             client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
             frameCount+=1
 
-def kickDrum(brightnessFactor):
+def bassScrollBeats(brightnessFactor):
     # always here
     global nStrips, lStrip
     client    = fastopc.FastOPC('localhost:7890')
     # setup
-    pixels = lib.Pixels(nStrips, lStrip, 0)
-    theoStrip = np.zeros([lStrip//2, 3])
-    stream = micStream.Stream(fps=60, nBuffers=4)
-    powerSmooth = lib.ExpFilter(val=0.05, alpha_rise=0.1, alpha_decay=0.1)
-    nColorWheel = 300
-    colorWheel = lib.getColorWheel(nColorWheel)
-    frameCount = 0
+    pixels            = lib.Pixels(nStrips, lStrip, 0)
+    theoStrips        = np.zeros([nStrips, lStrip, 3])
+    stream            = micStream.Stream(fps=30, nBuffers=4)
+    powerSmooth       = lib.ExpFilter(val=1.0, alpha_rise=0.01, alpha_decay=0.01)
+    nColorWheel       = 300
+    colorWheel        = lib.getColorWheel(nColorWheel)
+    frameCount        = 0
+    powerMinFreqIndex = int(0   / stream.dFreq)
+    powerMaxFreqIndex = int(120 / stream.dFreq)
+    currentStrips     = np.array([0,1])
     # loop
     while True:
         success = stream.readAndCalc()
         if success:
-            frameNumEff = np.mod(frameCount, nColorWheel)
-            #power = np.sum(stream.freqSpectrum[20//7:250//7])
-            power = np.sum(stream.freqSpectrum[:20])
+            frameNumEff   = np.mod(frameCount, nColorWheel)
+            power         = np.sum(stream.freqSpectrum[powerMinFreqIndex:powerMaxFreqIndex])
             powerSmooth.update(power)
-            if power > 1.e4:
-                displayPower = int(122*np.power(power/powerSmooth.value, 1.5))
-                theoStrip[:] = displayPower * colorWheel[frameNumEff]
-                #theoStrip[0] = 1000*colorWheel[frameNumEff]
-                pixels.update(theoStrip, 1.0, 0.4)
-                client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
-                frameCount+=1
-            else:
-                theoStrip[:] = np.zeros_like(theoStrip[:])
-                #theoStrip[0] = 1000*colorWheel[frameNumEff]
-                pixels.update(theoStrip, 1.0, 0.4)
-                client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
+            displayPower  = int(122*np.power(power/powerSmooth.value, 1.5))
+            theoStrips    = np.roll(theoStrips, -1, axis=1)
+            #theoStrips[:,-2] = displayPower * colorWheel[frameNumEff]
+            theoStrips[:,-2] = 0.0*colorWheel[frameNumEff]
+            theoStrips[currentStrips,-2] = displayPower * colorWheel[frameNumEff]
+            print(displayPower)
+            #if displayPower > 2000:
+                #currentStrips = np.arange(nStrips)
+            if displayPower < 50:
+                nCurrent      = np.random.randint(2,nStrips-1)
+                currentStrips = np.random.randint(0,nStrips, size=nCurrent)
+            theoStrips[:,-1] = 1000*colorWheel[frameNumEff]
+            pixels.update(theoStrips, 0.7, 0.5)
+            client.putPixels(0, brightnessFactor*pixels.getArrayForDisplay())
+            frameCount+=1
 
 
 def bassScrollTop(brightnessFactor):

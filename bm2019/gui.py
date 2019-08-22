@@ -29,7 +29,7 @@ def placePatternButtons(brightnessFactor):
     tk.Button(window1, text='joystick', command=lambda a=brightnessFactor: patterns.joystick(a)).grid(row=8+14, column=1, sticky='W')
     tk.Button(window1, text='loopTest', command=lambda a=brightnessFactor: patterns.loopTest(a)).grid(row=8+15, column=1, sticky='W')
     tk.Button(window1, text='drums_midi', command=lambda a=brightnessFactor: patterns.drums_midi(a)).grid(row=8+16, column=1, sticky='W')
-    tk.Button(window1, text='kick_drum', command=lambda a=brightnessFactor: patterns.kickDrum(a)).grid(row=8+17, column=1, sticky='W')
+    tk.Button(window1, text='bassScrollBeats', command=lambda a=brightnessFactor: patterns.bassScrollBeats(a)).grid(row=8+17, column=1, sticky='W')
 
 
 def changeBrightness(i):

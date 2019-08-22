@@ -62,6 +62,12 @@ class Pixels():
             alpha[alpha > 0.0 ] = alphaRise
             alpha[alpha <= 0.0] = alphaDecay
             self.array = alpha*arrayNew + (1.0-alpha)*self.array
+        elif arrayNew.shape == (self.nStrips, self.lStrip, 3):
+            arrayNew = arrayNew.reshape(self.nLed, 3) 
+            alpha    = arrayNew - self.array
+            alpha[alpha > 0.0 ] = alphaRise
+            alpha[alpha <= 0.0] = alphaDecay
+            self.array = alpha*arrayNew + (1.0-alpha)*self.array
         elif arrayNew.shape == (self.lStrip//2,   3):
             arrayNewFlip = np.flip(arrayNew, axis=0)
             arrayNewDouble = np.concatenate((arrayNewFlip,arrayNew), axis=0)
